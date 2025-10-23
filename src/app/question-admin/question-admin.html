@@ -1,0 +1,46 @@
+<div class="admin-container">
+  <h2>Gestion des questions 🧠</h2>
+
+  <!-- Formulaire -->
+  <div class="form">
+    <input [(ngModel)]="currentQuestion.intitule" placeholder="Texte de la question" />
+    <input [(ngModel)]="currentQuestion.examen" placeholder="Catégorie" />
+    <textarea [(ngModel)]="currentQuestion.description" placeholder="description"></textarea>
+    <input [(ngModel)]="currentQuestion.reponseA" placeholder="Réponse A" />
+    <input [(ngModel)]="currentQuestion.reponseB" placeholder="Réponse B" />
+    <input [(ngModel)]="currentQuestion.reponseC" placeholder="Réponse C" />
+    <input [(ngModel)]="currentQuestion.reponseD" placeholder="Réponse D" />
+    <input [(ngModel)]="currentQuestion.correctAnswer" placeholder="Bonne réponse (A/B/C/D)" />
+
+    <input type="file" (change)="onFileChanged($event)" />
+    <img *ngIf="previewUrl" [src]="previewUrl" width="200" alt="aperçu image" style="margin:10px 0;display:block;">
+    <button (click)="saveQuestion()">
+      {{ editingQuestion ? 'Mettre à jour' : 'Ajouter' }}
+    </button>
+    <button *ngIf="editingQuestion" (click)="cancelEdit()">Annuler</button>
+  </div>
+
+  <hr />
+
+  <!-- Liste -->
+  <h3>Liste des questions existantes</h3>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Catégorie</th>
+      <th>Texte</th>
+      <th>Bonne réponse</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let q of questions">
+      <td>{{ q.id }}</td>
+      <td>{{ q.category }}</td>
+      <td>{{ q.intitule }}</td>
+      <td>{{ q.correctAnswer }}</td>
+      <td>
+        <button (click)="editQuestion(q)">✏️ Modifier</button>
+        <button (click)="deleteQuestion(q.id!)">🗑️ Supprimer</button>
+      </td>
+    </tr>
+  </table>
+</div>

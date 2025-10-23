@@ -1,0 +1,68 @@
+<div class="prepa-page-wrapper">
+  <div class="prepa-quiz-container">
+
+    <div *ngIf="loading" class="prepa-loading">Chargement des questions...</div>
+
+    <div *ngIf="error" class="prepa-error">{{ error }}</div>
+
+    <ng-container *ngIf="!loading && !error && !quizFinished">
+
+      <div class="prepa-quiz-header">
+        <h2>Catégorie : {{ category }}</h2>
+        <p>Question {{ currentIndex + 1 }} / {{ questions.length }} — Score : {{ score }}</p>
+      </div>
+
+      <div class="prepa-question-card" *ngIf="questions.length">
+
+
+        <div class="question-block">
+          <p class="question-text">{{ questions[currentIndex].intitule }}</p>
+          <img [src]="retrieveImage(questions[currentIndex].photo)" alt="Image" />
+        </div>
+
+
+
+        <img *ngIf="questions[currentIndex].photo"
+             [src]="'data:image/jpeg;base64,' + questions[currentIndex].photo"
+             class="prepa-question-img"
+             alt="Image question">
+
+        <h3 class="prepa-question-text">
+          {{ questions[currentIndex].intitule }}
+        </h3>
+
+        <div class="answers">
+          <label>
+            <input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'A')">
+            A) {{ questions[currentIndex].reponseA }}
+          </label>
+          <label>
+            <input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'B')">
+            B) {{ questions[currentIndex].reponseB }}
+          </label>
+          <label>
+            <input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'C')">
+            C) {{ questions[currentIndex].reponseC }}
+          </label>
+          <label>
+            <input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'D')">
+            D) {{ questions[currentIndex].reponseD }}
+          </label>
+        </div>
+
+        <div *ngIf="showResult" class="prepa-feedback">
+          <p *ngIf="isCorrect" class="prepa-good">✅ Bonne réponse !</p>
+          <p *ngIf="!isCorrect" class="prepa-bad">❌ Mauvaise réponse.</p>
+          <button class="prepa-next-btn" (click)="nextQuestion()">Suivant ➜</button>
+        </div>
+      </div>
+
+    </ng-container>
+
+    <div *ngIf="quizFinished" class="prepa-quiz-result">
+      <h2>🎉 Quiz terminé !</h2>
+      <p>Score final : <strong>{{ score }}</strong> / {{ questions.length }}</p>
+      <button class="prepa-restart-btn" (click)="restartQuiz()">Recommencer</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="account-wrapper">
+  <!-- Bloc gauche -->
+  <aside class="account-sidebar">
+    <nav class="account-menu">
+      <button
+        *ngFor="let item of menuItems"
+        (click)="selectSection(item.id)"
+        [class.active]="selectedSection === item.id">
+        <i [class]="item.icon"></i> {{ item.label }}
+      </button>
+    </nav>
+  </aside>
+
+  <!-- Bloc principal -->
+  <main class="account-content">
+    <!-- parent div avec ngSwitch -->
+    <div class="fade">
+
+      <ng-container *ngIf="this.selectedSection==='dashboard'">
+        <h2>Tableau de bord</h2>
+        <p>Bonjour {{ connectedUser.username }}</p>
+
+         <p> Pour commencer ta préparation, clique sur « Préparation » en haut de la page. Tu y trouveras le cours théorique, les examens blancs, le test de perception des risques et la préparation à l’examen pratique.</p>
+      </ng-container>
+
+      <ng-container *ngIf="this.selectedSection==='payments'">
+        <h2>Paiements</h2>
+        <p>Historique et état de vos paiements récents.</p>
+        <div class="scroll-card col-3" *ngFor="let paiement of paiements">
+          <p> je suis avec un nouvel abonnement</p>
+          {{paiement.id}}
+        </div>
+
+      </ng-container>
+
+      <ng-container  *ngIf="this.selectedSection==='subscriptions'">
+        <h2>Abonnements</h2>
+        <p>Vos abonnements actifs et leurs dates d’expiration.</p>
+
+        <div class="scroll-card col-3" *ngFor="let abonnement of abonnements">
+          <p> je suis avec un nouvel abonnement</p>
+          {{abonnement.id}}
+        </div>
+      </ng-container>
+
+      <ng-container  *ngIf="this.selectedSection==='logout'">
+        <h2>Déconnexion</h2>
+        <p>Vous allez être déconnecté de votre compte.</p>
+      </ng-container>
+
+      <!-- fallback si aucune correspondance -->
+      <ng-container>
+        <p>Section introuvable</p>
+      </ng-container>
+
+    </div>
+  </main>
+</div>

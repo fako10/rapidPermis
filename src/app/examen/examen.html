@@ -1,0 +1,31 @@
+<div class="exam-container" *ngIf="questions.length && !isFinished">
+  <h2>Examen pratique — question {{ currentIndex + 1 }} / {{ questions.length }}</h2>
+
+  <div class="timer">Temps restant : <strong>{{ timeLeft }}</strong> s</div>
+
+  <div class="question-block">
+    <p class="question-text">{{ questions[currentIndex].intitule }}</p>
+    <img [src]="retrieveImage(questions[currentIndex].photo)" alt="Image" />
+  </div>
+
+  <div class="answers">
+    <label><input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'A')" [checked]="userAnswers[questions[currentIndex].id] === 'A'"> A) {{ questions[currentIndex].reponseA }}</label>
+    <label><input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'B')" [checked]="userAnswers[questions[currentIndex].id] === 'B'"> B) {{ questions[currentIndex].reponseB }}</label>
+    <label><input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'C')" [checked]="userAnswers[questions[currentIndex].id] === 'C'"> C) {{ questions[currentIndex].reponseC }}</label>
+    <label><input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'C')" [checked]="userAnswers[questions[currentIndex].id] === 'D'"> D) {{ questions[currentIndex].reponseD }}</label>
+  </div>
+
+  <div class="controls">
+    <button (click)="prevQuestion()" [disabled]="currentIndex === 0">⬅️ Précédent</button>
+    <button (click)="nextQuestion()">Suivant ➡️</button>
+    <button (click)="finishExam()">Terminer maintenant</button>
+    <label><input type="checkbox" [(ngModel)]="ttsEnabled"> Voix (lire les questions)</label>
+  </div>
+</div>
+
+<div *ngIf="isFinished">
+  <h2>Examen terminé</h2>
+  <p>Score : {{ result?.score }} / {{ result?.totalQuestions }}</p>
+  <pre>{{ result | json }}</pre>
+  <button (click)="startExam()">Recommencer</button>
+</div>

@@ -1,0 +1,5 @@
+.exam-container { max-width: 800px; margin: 20px auto; padding: 16px; background: #fff; border-radius: 8px; box-shadow: 0 0 6px #ccc; }
+.timer { font-size: 1.2rem; margin-bottom: 10px; }
+.question-block { margin-bottom: 12px; }
+.answers label { display: block; margin: 8px 0; }
+.controls { margin-top: 12px; }

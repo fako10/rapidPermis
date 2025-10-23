@@ -1,0 +1,61 @@
+<div class="prepa-container">
+  <!-- Header -->
+  <header class="prepa-header">
+    <h1 class="prepa-title">🚗 Préparation à l'examen théorique</h1>
+
+    <div class="prepa-buttons">
+      <button
+        class="prepa-btn prepa-btn-training"
+        [class.prepa-btn-active]="mode === 'training'"
+        (click)="selectMode('training')">
+        Mode Entraînement
+      </button>
+
+      <button
+        class="prepa-btn prepa-btn-simulation"
+        [class.prepa-btn-active]="mode === 'simulation'"
+        (click)="selectMode('simulation')">
+        Mode Simulation
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="prepa-main">
+
+    <!-- Si aucun mode -->
+    <div *ngIf="!mode" class="prepa-empty">
+      <p>Choisissez un mode pour commencer votre préparation 👇</p>
+    </div>
+
+    <!-- Mode Entraînement -->
+    <div *ngIf="mode === 'training'" class="prepa-section">
+      <h2 class="prepa-section-title">🧠 Catégories d'entraînement</h2>
+
+      <div class="prepa-grid">
+        <div *ngFor="let cat of categories" class="prepa-card">
+          <div class="prepa-card-icon">{{ cat.icon }}</div>
+          <div class="prepa-card-title">{{ cat.name }}</div>
+          <button class="prepa-card-btn" (click)="startCategory(cat)">Commencer l'entraînement</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mode Simulation -->
+    <div *ngIf="mode === 'simulation'" class="prepa-section">
+      <h2 class="prepa-section-title">🎯 Examens de simulation</h2>
+
+      <div class="prepa-grid">
+        <div *ngFor="let sim of simulations" class="prepa-card">
+          <div class="prepa-card-title">{{ sim.title }}</div>
+          <div class="prepa-card-info">
+            {{ sim.questions }} questions — {{ sim.duration }} min
+          </div>
+          <button class="prepa-card-btn" (click)="startSimulation(sim)">Commencer</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+</div>

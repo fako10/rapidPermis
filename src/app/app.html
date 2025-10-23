@@ -1,27 +1,40 @@
-<header>
-  <a href="/accueil">Mon Permis Facile</a>
-  <nav>
-    <ul>
-      <li><a href="/examen-theorique">Examen theorique</a></li>
-      <li><a href="#">Perception de Risques</a></li>
-      <li><a href="#">Examen Pratique</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
+<header class="prepa-header">
+
+  <!-- Partie gauche -->
+  <a href="/accueil" class="prepa-logo">
+    <img src="assets/images/logo.png" alt="Rapide Permis Logo" class="prepa-logo-img" />
+    Rapide Permis
+  </a>
+  <!-- Partie milieu -->
+  <div class="prepa-header-center" *ngIf="!isLoggedIn">
+    <nav class="prepa-nav">
+      <ul>
+        <li><a href="/examen-theorique">Examen théorique</a></li>
+        <li><a href="#">Perception des risques</a></li>
+        <li><a href="#">Examen pratique</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+
+
+  <!-- Partie droite -->
+  <div class="prepa-header-right">
+    <button (click)="gotoPreparation()" class="prepa-btn prepa-btn-filled">préparation</button>
+    <button *ngIf="!isLoggedIn" class="prepa-btn prepa-btn-outline" (click)="gotoConnexion()">Connexion</button>
+    <div class="profile-container" (click)="goToMonCompte()" *ngIf="isLoggedIn">
+      <img src="assets/images/utilisateur.png" alt="Photo de profil" class="profile-avatar" />
+      <span class="profile-username">{{ connectedUser.username }}</span>
+    </div>
+  </div>
+
 </header>
 
+<main class="prepa-main back">
+  <router-outlet></router-outlet>
+</main>
 
-
-<section class="hero">
-  <h2>Réussissez votre examen du premier coup 🚗</h2>
-  <p>Entraînez-vous au code de la route belge avec des cours interactifs et des tests blancs.</p>
-  <button>Commencer l'entraînement</button>
-</section>
-
-
-
-<router-outlet></router-outlet>
-
-<footer>
+<footer class="prepa-footer">
   &copy; 2025 Permis Belgique. Tous droits réservés.
 </footer>

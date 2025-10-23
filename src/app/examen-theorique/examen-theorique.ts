@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-examen-theorique',
@@ -8,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './examen-theorique.css'
 })
 export class ExamenTheorique {
+
+  constructor(
+    private router: Router) {}
+
+  gotoInscription() {
+    console.log('je passe ici')
+    this.router.navigateByUrl(`inscription`)
+  }
 
 }

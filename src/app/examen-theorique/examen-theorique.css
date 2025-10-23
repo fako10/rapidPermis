@@ -1,0 +1,36 @@
+.theory-exam {
+  padding: 2.5rem 1rem;
+  background: #f7f9fc;
+}
+
+.theory-exam .container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.theory-exam h2 {
+  text-align: center;
+  color: #004aad;
+  margin-bottom: 2rem;
+  font-size: 1.9rem;
+}
+
+.block {
+  background: white;
+  margin: 0 7rem 1.5rem 7rem;
+  padding: 1.8rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.block h3 {
+  margin-bottom: 1rem;
+  color: #004aad;
+  padding: 0 7rem;
+}
+
+.block p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}

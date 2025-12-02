@@ -1,147 +1,152 @@
 <section>
+<div class="block">
 
-  <h2 style="text-align:center; margin-bottom:1.5rem;">Examen Théorique</h2>
-
-  <div class="cardes">
-
-    <div class="card-blue">
-      <h3>📚 Questions adaptées</h3>
-      <p>
-        Entraînez-vous avec plus de 1000 questions conformes à l’examen officiel.
-        Chaque série couvre l’ensemble des thématiques, pour vous permettre de réviser efficacement
-        et d’acquérir les bons réflexes de réponse.
-      </p>
-
-      <p>
-        Aucun sujet important lié à la conduite et à la sécurité routière n’a échappé à notre œil aiguisé. Nos questions couvrent l’intégralité de ceux-ci. Elles ont été soigneusement élaborées pour accompagner les apprenants de tous les niveaux, qu’il s’agisse de débutants ou de candidats sur le point de passer leur examen.
-      </p>
-
-    </div>
-
-    <div class="card-orange">
-      <h3>🎯 Taux de réussite élevé</h3>
-      <p >
-        Grâce à notre méthode progressive et interactive, plus de 90% de nos utilisateurs
-        réussissent leur examen théorique dès la première tentative.
-        Vous avancez étape par étape et validez vos acquis en toute confiance.
-      </p>
-
-    </div>
-
-    <div class="card-blue">
-      <h3>📝 2 Modes d’examen</h3>
-      <p>
-        Préparez-vous dans des conditions proches de l’examen réel grâce à nos différents modes :
-        entraînement libre, tests thématiques, ou examen blanc chronométré.
-        Adaptez votre préparation à votre rythme et vos besoins.
-      </p>
-    </div>
-
+  <!-- Title -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold">Cours du Code de la Route</h1>
+    <p class="text-muted">Choisissez un thème pour accéder au contenu détaillé</p>
   </div>
 
-  <br>
+  <!-- Themes Grid -->
+  <div class="row g-4">
 
-    <div class="block">
-      <h3>📚 Des questions variées et adaptées</h3>
-      <p style="text-align: justify; padding: 0 7rem">
-        La clé d’une bonne préparation réside dans la pratique régulière de questions similaires à celles de l’examen officiel.
-        Notre plateforme propose plus de 1000 questions couvrant toutes les thématiques : panneaux de signalisation, règles de circulation,
-        priorité, sécurité routière et comportement du conducteur... Chaque série est pensée pour vous aider à assimiler progressivement
-        les notions et à mémoriser les points essentiels. Plus vous vous exercez, plus vous développez des automatismes qui vous seront
-        indispensables le jour de l’épreuve.
-      </p>
-    </div>
-
-
-  <div class="block">
-    <h3>🎯 Un taux de réussite élevé</h3>
-    <p style="text-align: justify; justify; padding: 0 7rem">
-      Les statistiques parlent d’elles-mêmes : nos méthodes d’apprentissage permettent à une grande majorité de candidats
-      de réussir leur examen dès la première tentative. Grâce à un suivi personnalisé et à une progression étape par étape,
-      vous pouvez identifier vos points faibles, retravailler les notions mal comprises et consolider vos acquis.
-      L’approche interactive et les retours immédiats après chaque question renforcent votre compréhension et votre confiance.
-    </p>
-  </div>
-
-  <div class="block">
-    <h3>📝 Des modes d’examen réalistes</h3>
-    <p style="text-align: justify;">
-      S’entraîner dans des conditions proches de l’examen est un atout majeur pour réussir. C’est pourquoi notre plateforme met à disposition
-      plusieurs modes de préparation : l’entraînement libre, pour réviser à votre rythme ; les tests thématiques, pour cibler des points précis
-      du programme ; et les examens blancs chronométrés, pour reproduire fidèlement les conditions réelles. Ces différents formats vous permettent
-      de gagner en assurance et de gérer efficacement votre temps de réponse le jour J.
-    </p>
-  </div>
-</section>
-
-
-<section class="payment">
-  <div class="container">
-    <h2>Paiement sécurisé</h2>
-
-    <!-- Bloc 1 : Choix de l’offre -->
-    <div class="block">
-      <h3>📦 Choisissez votre formule</h3>
-      <p style="text-align: justify;">
-        Sélectionnez l’offre qui correspond le mieux à vos besoins : accès illimité à toutes les questions,
-        pack examen blanc ou formule complète avec suivi personnalisé. Chaque option est conçue pour vous
-        accompagner efficacement jusqu’à la réussite de votre permis.
-      </p>
-      <div class="offers">
-        <div class="offer">
-          <h4>Pack Découverte</h4>
-          <p>Accès 7 jours • 500 questions</p>
-          <p class="price">9,99 €</p>
-          <button class="btn" (click)="gotoInscription()">Choisir</button>
-        </div>
-        <div class="offer">
-          <h4>Pack Standard</h4>
-          <p>Accès 1 mois • 1500 questions + examens blancs</p>
-          <p class="price">19,99 €</p>
-          <button class="btn">Choisir</button>
-        </div>
-        <div class="offer">
-          <h4>Pack Premium</h4>
-          <p>Accès illimité • Tout inclus + suivi personnalisé</p>
-          <p class="price">29,99 €</p>
-          <button class="btn">Choisir</button>
+    <!-- THEME 1 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 1</h4>
+          <p class="text-muted">La circulation routière</p>
+          <a routerLink="/cours/theme/1" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Bloc 2 : Résumé de la commande -->
-    <div class="block">
-      <h3>🧾 Résumé de votre commande</h3>
-      <p style="text-align: justify;">
-        Vous avez sélectionné : <strong>Pack Standard</strong>.
-        Accès pendant 1 mois à plus de 1500 questions et examens blancs.
-      </p>
-      <p><strong>Total : 19,99 €</strong></p>
-    </div>
-
-    <!-- Bloc 3 : Formulaire de paiement -->
-    <div class="block">
-      <h3>💳 Informations de paiement</h3>
-      <form>
-        <label for="cardName">Nom sur la carte</label>
-        <input type="text" id="cardName" placeholder="Jean Dupont" required>
-
-        <label for="cardNumber">Numéro de carte</label>
-        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
-
-        <div class="inline">
-          <div>
-            <label for="expiry">Expiration</label>
-            <input type="text" id="expiry" placeholder="MM/AA" required>
-          </div>
-          <div>
-            <label for="cvc">CVC</label>
-            <input type="text" id="cvc" placeholder="123" required>
-          </div>
+    <!-- THEME 2 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 2</h4>
+          <p class="text-muted">Le conducteur</p>
+          <a routerLink="/cours/theme/1" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
         </div>
-
-        <button type="submit" class="btn btn-pay">Payer maintenant</button>
-      </form>
+      </div>
     </div>
+
+    <!-- THEME 3 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 3</h4>
+          <p class="text-muted">La route</p>
+          <a routerLink="/cours/theme/3" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEME 4 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 4</h4>
+          <p class="text-muted">Les autres usagers</p>
+          <a routerLink="/cours/theme/4" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEME 5 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 5</h4>
+          <p class="text-muted">Réglementation générale</p>
+          <a routerLink="/cours/theme/5" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEME 6 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 6</h4>
+          <p class="text-muted">Les premiers secours</p>
+          <a routerLink="/cours/theme/6" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEME 7 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 7</h4>
+          <p class="text-muted">Prendre et quitter son véhicule</p>
+          <a routerLink="/cours/theme/7" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEME 8 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 8</h4>
+          <p class="text-muted">La mécanique et l’entretien</p>
+          <a routerLink="/cours/theme/8" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEME 9 -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 9</h4>
+          <p class="text-muted">Sécurité conducteur & routière</p>
+          <a routerLink="/cours/theme/9" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEME 10 -->
+    <div class="col-md-6 col-lg-4 mx-auto">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <h4 class="fw-bold">Thème 10</h4>
+          <p class="text-muted">Environnement</p>
+          <a routerLink="/cours/theme/10" class="btn btn-primary w-100 mt-3">
+            Voir le cours
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
+</div>
+
+
+
 </section>
+
+
+
+

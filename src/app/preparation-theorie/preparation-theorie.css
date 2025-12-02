@@ -70,8 +70,8 @@
   flex: 1;
   width: 100%;
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* === Section vide === */
@@ -79,7 +79,8 @@
   text-align: center;
   color: #6b7280;
   font-size: 1.1rem;
-  margin-top: 3rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* === Titres de section === */
@@ -88,7 +89,8 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* === Grille de cartes === */
@@ -104,7 +106,8 @@
   background-color: #ffffff;
   border: 1px solid #f3f4f6;
   border-radius: 1rem;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
   width: 100%;
   text-align: center;
   transition: all 0.2s ease-in-out;
@@ -161,4 +164,154 @@
   border-top: 1px solid #f3f4f6;
   padding: 1rem 0;
   background-color: #ffffff;
+}
+
+
+.prepa-card.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* empêche tout clic sur la carte */
+  filter: grayscale(100%);
+}
+
+
+
+/* ------- LISTE DES CATÉGORIES ------- */
+.categorie {
+  padding: 12px 16px;
+  background: #ffffff;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.categorie:hover {
+  background: #f7f7f7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+
+/* ------- OVERLAY ------- */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.3s ease forwards;
+  z-index: 1000;
+}
+
+/* animation fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* ------- POPUP ------- */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: white;
+  margin: 0;
+  padding: 0;
+  width: 380px;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+  z-index: 1001;
+
+  /* animation popup */
+  animation: popIn 0.25s ease forwards;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.popup h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/* ------- ACTIVITÉS ------- */
+.popup ul {
+  padding: 0;
+  margin: 0;
+}
+
+.popup li {
+  list-style: none;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 15px;
+}
+
+.popup li:hover {
+  background: #e5e5ff; /* léger violet */
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transform: translateX(4px);
+}
+
+
+/* ------- BOUTON FERMER ------- */
+.close-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 12px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #554de1;
+  box-shadow: 0 4px 14px rgba(108, 99, 255, 0.4);
+}
+
+
+/* ------- ERREUR ------- */
+.error {
+  color: #d9534f;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+
+/* ------- RESPONSIVE ------- */
+@media (max-width: 450px) {
+  .popup {
+    width: 90%;
+    padding: 18px;
+  }
+
+  .categorie {
+    font-size: 15px;
+  }
 }

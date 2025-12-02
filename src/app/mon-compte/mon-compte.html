@@ -46,6 +46,7 @@
       <ng-container  *ngIf="this.selectedSection==='logout'">
         <h2>Déconnexion</h2>
         <p>Vous allez être déconnecté de votre compte.</p>
+        <button (click)="logout()">Déconnexion</button>
       </ng-container>
 
       <!-- fallback si aucune correspondance -->

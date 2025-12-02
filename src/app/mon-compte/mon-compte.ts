@@ -5,10 +5,10 @@ import {Utilisateur} from '../_models/utilisateur.model';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../_services/token.storage.service';
 import {Abonnement} from '../_models/abonnement.model';
-import {Payement} from '../_models/payment.model';
-import {ExamenService} from '../_services/examen.service';
 import {PaymentService} from '../_services/payment.service';
 import {UserPaiementsAndAbonnements} from '../_models/userPaiementsAndAbonnements.model';
+import {Payement} from '../_models/paiement.model';
+import {AuthService} from '../_services/auth.service';
 
 @Component({
   selector: 'app-mon-compte',
@@ -29,22 +29,31 @@ export class MonCompte implements OnInit {
 
   paiements : Payement[] = [];
   userPaiementsAndAbonnements!: UserPaiementsAndAbonnements;
+  isLoggedIn = false;
 
   constructor(private router: Router,
               private tokenStorageService: TokenStorageService,
-              private PaymentService: PaymentService
+              private PaymentService: PaymentService,
+              private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.connectedUser = this.tokenStorageService.getUser();
-    this.selectedSection = this.menuItems[0].id;
-    this.PaymentService.getAbonnements().subscribe({
-      next: res => {
-        this.abonnements = res.abonnements;
-        this.paiements = res.payements;
-      },
-      error: err => console.error('Erreur submit', err)
-    });
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if(this.isLoggedIn) {
+      this.connectedUser = this.tokenStorageService.getUser();
+      this.selectedSection = this.menuItems[0].id;
+      this.PaymentService.getAbonnements().subscribe({
+        next: res => {
+          this.abonnements = res.abonnements;
+          this.paiements = res.payements;
+        },
+        error: err => console.error('Erreur submit', err)
+      });
+    } else {
+      this.router.navigateByUrl(`connexion`);
+    }
+
+
 
   }
 
@@ -58,8 +67,13 @@ export class MonCompte implements OnInit {
   ];
 
   selectSection(sectionId: string) {
-    console.log(sectionId);
     this.selectedSection = sectionId;
+  }
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    this.authService.logout();
+    window.location.reload();
   }
 
 }

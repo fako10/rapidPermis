@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Question} from '../_models/question.model';
 import {QuestionService} from '../_services/question.service';
 import {FormsModule} from '@angular/forms';
-import {NgForOf, NgIf} from '@angular/common';
+import {formatDate, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-question-admin',
@@ -32,7 +32,7 @@ export class QuestionAdmin implements OnInit {
     reponseC: '',
     reponseD: '',
     intitule: '',
-    correctAnswer: ''
+    reponseCorrecte: ''
   };
 
   constructor(private questionService: QuestionService) {}
@@ -49,7 +49,7 @@ export class QuestionAdmin implements OnInit {
       reponseC: '',
       reponseD: '',
       intitule: '',
-      correctAnswer: ''
+      reponseCorrecte: ''
     };
   }
 
@@ -63,7 +63,7 @@ export class QuestionAdmin implements OnInit {
   public onFileChanged(event: Event) {
     // @ts-ignore
     this.selectedFiles = event.target.files;
-    console.log(this.selectedFiles.length);
+
   }
 
 
@@ -92,12 +92,15 @@ export class QuestionAdmin implements OnInit {
         }
       });
     } else {
+      let dateAnnonce = new Date();
+      const cValue = formatDate(dateAnnonce, 'yyyyMMddhhmmss', 'en-US');
+      this.currentQuestion.codeQuestion = cValue;
       this.questionService.createQuestion(this.currentQuestion).subscribe({
         next: (value) => {
           this.questionSave = value;
           let id = value.examen == null ? 0 : value.examen;
-          this.questionService.addPhoto(id, this.selectedFiles).subscribe(data => {
-            console.log(data);
+          this.questionService.addPhoto(cValue, this.selectedFiles).subscribe(data => {
+
           });
           this.loadQuestions();
           this.currentQuestion = {
@@ -107,7 +110,7 @@ export class QuestionAdmin implements OnInit {
             reponseB: '',
             reponseC: '',
             reponseD: '',
-            correctAnswer: ''
+            reponseCorrecte: ''
           };
         }
       });

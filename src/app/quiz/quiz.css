@@ -1,5 +1,5 @@
 /* ✅ Structure globale */
-.prepa-page-wrapper {
+  .prepa-page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,38 +60,119 @@
   display: block;
 }
 
-/* ✅ Réponses */
-.answers {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 0 auto;
-  max-width: 400px;
-  gap: 10px;
-  text-align: left;
-}
 
+
+/* --- Réglages de base des labels de réponse --- */
 .answers label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 15px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  gap: 12px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  transition: all 0.25s ease;
   cursor: pointer;
-  width: 100%;
-  background: #f9fafb;
-  transition: all 0.2s ease-in-out;
+  position: relative;
 }
 
-.answers label:hover {
-  background: #eff6ff;
-  border-color: #3b82f6;
-}
-
+/* Cache le radio d'origine */
 .answers input[type="radio"] {
-  accent-color: #3b82f6;
+  display: none;
 }
+
+/* --- RADIO CUSTOM --- */
+.custom-radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+/* Cercle intérieur (rempli au click) */
+.custom-radio::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: transparent;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+/* Quand sélectionné → cercle animé violet */
+.answers label.selected-answer .custom-radio {
+  border-color: #7b61ff;
+  box-shadow: 0 0 8px rgba(123,97,255,0.6);
+}
+
+.answers label.selected-answer .custom-radio::after {
+  background: #7b61ff;
+  transform: scale(1.1);
+}
+
+/* --- Glow pulse animé --- */
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 6px rgba(123, 97, 255, 0.4); }
+  50% { box-shadow: 0 0 16px rgba(123, 97, 255, 0.9); }
+  100% { box-shadow: 0 0 6px rgba(123, 97, 255, 0.4); }
+}
+
+.answers label.selected-answer {
+  background: rgba(123, 97, 255, 0.15);
+  animation: glowPulse 1.2s infinite;
+  transform: scale(1.02);
+}
+
+/* Correct (vert) */
+.answers label.correct {
+  border-color: #4caf50;
+  background: rgba(76, 175, 80, 0.15);
+  animation: glowPulse 1.2s infinite alternate;
+}
+
+.answers label.correct .custom-radio {
+  border-color: #4caf50;
+}
+
+.answers label.correct .custom-radio::after {
+  background: #4caf50;
+}
+
+/* Wrong (rouge) */
+.answers label.wrong {
+  border-color: #e53935;
+  background: rgba(229, 57, 53, 0.15);
+  animation: glowPulse 1.2s infinite alternate;
+}
+
+.answers label.wrong .custom-radio {
+  border-color: #e53935;
+}
+
+.answers label.wrong .custom-radio::after {
+  background: #e53935;
+}
+
+/* Disable lorsque la réponse est validée */
+.answers label.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none !important;
+}
+
+.answers label.disabled .custom-radio {
+  box-shadow: none !important;
+}
+
+
+
+
 
 /* ✅ Feedback (bonne / mauvaise réponse) */
 .prepa-feedback {
@@ -153,4 +234,83 @@
 
 .prepa-error {
   color: #dc2626;
+}
+
+
+
+
+.questions-block img {
+  max-width: 100%;       /* l'image ne dépasse jamais la largeur de son conteneur */
+  max-height: 30vh;      /* hauteur maximale = 60% de la hauteur de la fenêtre */
+  object-fit: contain;   /* garde les proportions, pas de déformation */
+  display: block;        /* supprime l’espace sous l’image */
+  margin: 0 auto 0px;   /* centre et espace en dessous */
+}
+
+
+
+
+.quiz-layout {
+  display: flex;
+  width: 100%;
+  padding: 0% 10%; /* <-- marges gauche/droite */
+  gap: 0;          /* <-- coller les 2 colonnes */
+  background: #f4f5ff;
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Colonne gauche */
+.quiz-left {
+  flex: 2;
+  padding: 30px;
+  background: white;
+  border-right: 1px solid #e6e6ef;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Colonne droite (glass morphism) */
+.quiz-right {
+  flex: 1;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.55);
+  border-left: 1px solid rgba(200, 200, 230, 0.4);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Explication */
+.explanation-box {
+  background: white;
+  padding: 0px;
+  border-radius: 14px;
+  border: 1px solid #e0dff3;
+  box-shadow: 0 6px 16px rgba(123, 97, 255, 0.08);
+  animation: fadeIn 0.4s ease;
+}
+.explanation-wait {
+  color: #777;
+  font-style: italic;
+  padding-top: 40px;
+  text-align: center;
+}
+
+/* Animation fade légère */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive mobile */
+@media (max-width: 900px) {
+  .quiz-layout {
+    flex-direction: column;
+  }
+  .quiz-right {
+    border-left: none;
+    border-top: 0px solid #eee;
+  }
 }

@@ -9,6 +9,7 @@ export class Question {
   reponseB?: string;
   reponseC?: string;
   reponseD?: string;
-  correctAnswer?: string;
+  reponseCorrecte?: string;
   photo?:               File;
+  codeQuestion?:               string;
 }

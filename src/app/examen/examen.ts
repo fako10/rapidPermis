@@ -128,7 +128,7 @@ export class Examen implements OnInit, OnDestroy {
     this.examService.submitAttempt(payload).subscribe({
       next: res => {
         this.result = res;
-        console.log('Attempt saved', res);
+
       },
       error: err => console.error('Erreur submit', err)
     });

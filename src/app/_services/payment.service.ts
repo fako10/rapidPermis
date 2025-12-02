@@ -3,11 +3,9 @@ import {Observable} from 'rxjs';
 import {Question} from '../_models/question.model';
 import {HttpClient} from '@angular/common/http';
 import {Abonnement} from '../_models/abonnement.model';
-import {Order} from '@stripe/stripe-js';
-import Payment = Order.Payment;
 import {GlobalConstants} from '../_commons/global.constants';
-import {Payement} from '../_models/payment.model';
 import {UserPaiementsAndAbonnements} from '../_models/userPaiementsAndAbonnements.model';
+import {Payement} from '../_models/paiement.model';
 
 
 const apiConnectedUserAbonnement = GlobalConstants.baseUrl + "abonnement/connected-user";

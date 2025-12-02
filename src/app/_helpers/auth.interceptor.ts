@@ -1,8 +1,16 @@
 // auth.interceptor.ts
-import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptorFn, HttpHandlerFn} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptorFn,
+  HttpHandlerFn,
+  HttpErrorResponse
+} from '@angular/common/http';
+import {catchError, Observable, throwError} from 'rxjs';
 import { inject } from '@angular/core';
 import {TokenStorageService} from '../_services/token.storage.service';
+import {Router} from '@angular/router';
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
@@ -12,9 +20,6 @@ export const authInterceptor: HttpInterceptorFn = (
   const token = tokenService.getToken();
 
 
-  console.log('interceptor');
-  console.log(token);
-
   if (token) {
     const authReq = req.clone({
       setHeaders: {
@@ -22,12 +27,10 @@ export const authInterceptor: HttpInterceptorFn = (
       }
     });
 
-    console.log(authReq);
 
     return next(authReq);
   }
 
 
-
-  return next(req); // passe la requête clonée au handler
-};
+  return next(req);
+}

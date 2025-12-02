@@ -17,6 +17,13 @@
         (click)="selectMode('simulation')">
         Mode Simulation
       </button>
+
+      <button *ngIf="!isEnabled"
+        class="prepa-btn prepa-btn-simulation"
+        [class.prepa-btn-active]="mode === 'payment'"
+        (click)="selectMode('payment')">
+        payer
+      </button>
     </div>
   </header>
 
@@ -33,29 +40,128 @@
       <h2 class="prepa-section-title">🧠 Catégories d'entraînement</h2>
 
       <div class="prepa-grid">
-        <div *ngFor="let cat of categories" class="prepa-card">
+        <div *ngFor="let cat of categories" class="prepa-card"  [ngClass]="{ 'disabled': isEnabled }">
+
           <div class="prepa-card-icon">{{ cat.icon }}</div>
           <div class="prepa-card-title">{{ cat.name }}</div>
-          <button class="prepa-card-btn" (click)="startCategory(cat)">Commencer l'entraînement</button>
+          <button class="prepa-card-btn" (click)="ouvrirPopup(cat)">Commencer l'entraînement</button>
         </div>
+
       </div>
+
+      <!-- POPUP CUSTOM -->
+      <div class="overlay" *ngIf="popupVisible" (click)="fermerPopup()"></div>
+
+      <div class="popup" *ngIf="popupVisible">
+
+        <h3>{{ categorieCourante?.name }}</h3>
+
+        <!-- Loader -->
+        <div *ngIf="loading">Chargement des activités...</div>
+
+        <!-- Erreur backend -->
+        <div *ngIf="error" class="error">{{ error }}</div>
+
+        <!-- Liste des activités -->
+        <ul *ngIf="!loading && !error">
+          <li *ngFor="let act of activites" (click)="lancerActivite(act.id)">
+            {{ act.libelle }}
+          </li>
+        </ul>
+
+        <button class="close-btn" (click)="fermerPopup()">Fermer</button>
+      </div>
+
+
     </div>
 
     <!-- Mode Simulation -->
     <div *ngIf="mode === 'simulation'" class="prepa-section">
       <h2 class="prepa-section-title">🎯 Examens de simulation</h2>
 
+
+
       <div class="prepa-grid">
-        <div *ngFor="let sim of simulations" class="prepa-card">
+        <div
+          *ngFor="let sim of simulations"
+          class="prepa-card"
+          [ngClass]="{ 'disabled': !isEnabled }"
+        >
           <div class="prepa-card-title">{{ sim.title }}</div>
           <div class="prepa-card-info">
             {{ sim.questions }} questions — {{ sim.duration }} min
           </div>
-          <button class="prepa-card-btn" (click)="startSimulation(sim)">Commencer</button>
+          <button
+            class="prepa-card-btn"
+            (click)="startSimulation(sim)"
+            [disabled]="!sim.isAvailable"
+          >
+            Commencer
+          </button>
         </div>
       </div>
+
+      <br>
+      <h2 class="prepa-section-title">🎯 historique des examens passés</h2>
+
     </div>
+
+
+
+    <section class="payment" *ngIf="mode === 'payment'">
+      <div class="container">
+        <h2>Paiement sécurisé</h2>
+
+        <!-- Bloc 1 : Choix de l’offre -->
+        <div class="block">
+          <h3>📦 Choisissez votre formule</h3>
+          <p style="text-align: justify;">
+            Sélectionnez l’offre qui correspond le mieux à vos besoins : accès illimité à toutes les questions,
+            pack examen blanc ou formule complète avec suivi personnalisé. Chaque option est conçue pour vous
+            accompagner efficacement jusqu’à la réussite de votre permis.
+          </p>
+          <div class="offers">
+            <div class="offer">
+              <h4>Pack Découverte</h4>
+              <p>Accès 7 jours • 500 questions</p>
+              <p class="price">9,99 €</p>
+              <button class="btn" (click)="pay('DECOUVERTE', 999)">Choisir</button>
+            </div>
+            <div class="offer">
+              <h4>Pack Standard</h4>
+              <p>Accès 1 mois • 1500 questions + examens blancs</p>
+              <p class="price">19,99 €</p>
+              <button class="btn">Choisir</button>
+            </div>
+            <div class="offer">
+              <h4>Pack Confort</h4>
+              <p>Accès 3 mois • Tout inclus + suivi personnalisé</p>
+              <p class="price">29,99 €</p>
+              <button class="btn">Choisir</button>
+            </div>
+
+            <div class="offer">
+              <h4>Pack Premium</h4>
+              <p>Accès illimité • Tout inclus + suivi personnalisé</p>
+              <p class="price">39,99 €</p>
+              <button class="btn">Choisir</button>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </section>
+
   </main>
 
 
 </div>
+
+
+
+
+

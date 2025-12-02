@@ -2,16 +2,16 @@
 
   <!-- Partie gauche -->
   <a href="/accueil" class="prepa-logo">
-    <img src="assets/images/logo.png" alt="Rapide Permis Logo" class="prepa-logo-img" />
+    <img src="assets/images/mon_permis.png" alt="Rapide Permis Logo" class="prepa-logo-img" />
     Rapide Permis
   </a>
   <!-- Partie milieu -->
-  <div class="prepa-header-center" *ngIf="!isLoggedIn">
+  <div class="prepa-header-center" >
     <nav class="prepa-nav">
       <ul>
-        <li><a href="/examen-theorique">Examen théorique</a></li>
-        <li><a href="#">Perception des risques</a></li>
-        <li><a href="#">Examen pratique</a></li>
+        <li><a href="/accueil">Accueil</a></li>
+        <li><a href="/cours">Cours </a></li>
+        <li><a href="/tarifs">Tarifs</a></li>
       </ul>
     </nav>
   </div>
@@ -25,16 +25,64 @@
     <button *ngIf="!isLoggedIn" class="prepa-btn prepa-btn-outline" (click)="gotoConnexion()">Connexion</button>
     <div class="profile-container" (click)="goToMonCompte()" *ngIf="isLoggedIn">
       <img src="assets/images/utilisateur.png" alt="Photo de profil" class="profile-avatar" />
-      <span class="profile-username">{{ connectedUser.username }}</span>
+      <span class="profile-username" *ngIf="connectedUser">{{ connectedUser.username }}</span>
     </div>
   </div>
 
 </header>
 
 <main class="prepa-main back">
+
   <router-outlet></router-outlet>
 </main>
 
 <footer class="prepa-footer">
-  &copy; 2025 Permis Belgique. Tous droits réservés.
+  <div class="footer-container">
+
+    <div class="footer-section">
+      <h3>Entreprise</h3>
+      <ul>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Notre équipe</a></li>
+        <li><a href="#">Carrières</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="#">Préparation aux examens</a></li>
+        <li><a href="#">Simulations</a></li>
+        <li><a href="#">Formations vidéos</a></li>
+        <li><a href="#">Coaching personnalisé</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Support</h3>
+      <ul>
+        <li><a href="#">Centre d'aide</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Assistance technique</a></li>
+        <li><a href="#">Signaler un problème</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Légal</h3>
+      <ul>
+        <li><a href="#">Conditions d'utilisation</a></li>
+        <li><a href="#">Politique de confidentialité</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 - Tous droits réservés. VotreSite.com</p>
+  </div>
+
+
 </footer>

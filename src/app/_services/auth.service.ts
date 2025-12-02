@@ -1,11 +1,14 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {Utilisateur} from '../_models/utilisateur.model';
 import {GlobalConstants} from '../_commons/global.constants';
+import { jwtDecode } from 'jwt-decode';
+import {TokenStorageService} from './token.storage.service';
 
 
 const AUTH_API = GlobalConstants.baseUrl + "auth/"
+const AUTH_API_FORGET = GlobalConstants.baseUrl + "auth/forgot-password";
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -17,16 +20,39 @@ const USER_PASSWORD = 'password';
 
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  private loggedIn = new BehaviorSubject<boolean>(false);
+  loggedIn$ = this.loggedIn.asObservable();
+
+  constructor(private http: HttpClient,
+              private tokenStorageService: TokenStorageService) { }
 
   login(email: string | undefined, password: string): Observable<any> {
-    console.log('username ' + email);
-    console.log('password  ' +password);
+
+    //this.loggedIn.next(true);
     return this.http.post(AUTH_API + 'login', {
       email,
       password
     }, httpOptions);
   }
+
+  setLoggedIn(value: boolean) {
+    this.loggedIn.next(value);
+  }
+
+  logout() : void {
+    this.loggedIn.next(false);
+  }
+
+  isLoggedIn() {
+    return this.loggedIn.value;
+  }
+
+  resetUserPassword(user: string) : Observable<any> {
+
+    return this.http.post(AUTH_API_FORGET , user, { observe: 'response' });
+
+  }
+
 
   generatePwd(email: string | undefined) : Observable<any> {
     return this.http.post(AUTH_API + 'changepwd', email);
@@ -61,6 +87,15 @@ export class AuthService {
 
   public getPassword(): string | null {
     return window.sessionStorage.getItem(USER_PASSWORD);
+  }
+
+  isTokenExpired(): boolean {
+    const token = this.tokenStorageService.getToken();
+    if (!token) return true;
+
+    const decoded: any = jwtDecode(token);
+    const now = Math.floor(Date.now() / 1000);
+    return decoded.exp < now;
   }
 
 }

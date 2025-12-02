@@ -3,11 +3,13 @@ import {Question} from '../_models/question.model';
 import {QuestionService} from '../_services/question.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-quiz',
   imports: [
-    NgIf
+    NgIf,
+    FormsModule
   ],
   templateUrl: './quiz.html',
   standalone: true,
@@ -19,6 +21,7 @@ export class Quiz implements OnInit {
   questions: Question[] = [];
   userAnswers: { [key: number]: string } = {};
   score: number = 0;
+  id !: number;
   category!: string;
   showResult = false;
   isCorrect = false;
@@ -34,18 +37,16 @@ export class Quiz implements OnInit {
     private questionService: QuestionService) {}
 
   ngOnInit(): void {
-    this.category = this.route.snapshot.paramMap.get('category')!;
+    this.id = +this.route.snapshot.paramMap.get('id')!;
     this.loadQuestions();
   }
 
   loadQuestions(): void {
-    console.log("je passe ici");
-    this.questionService.getQuestionsByCategory(this.category).subscribe({
+
+    this.questionService.getQuestionsByActivite(this.id).subscribe({
       next: (data) => {
-        console.log(data);
         this.questions = data;
         this.loading = false;
-        console.log(this.questions);
       },
       error: (err) => console.error('Erreur lors du chargement des questions', err)
     });
@@ -60,10 +61,14 @@ export class Quiz implements OnInit {
     if (this.isCorrect) this.score++;
   }*/
 
+  chooseAnswer( answer: string) {
+    this.strSelectedAnswer = answer;
+  }
+
   selectAnswer(questionId: number, answer: string): void {
     if (this.showResult) return;
     this.strSelectedAnswer = answer;
-    this.isCorrect = answer === this.questions[this.currentIndex].correctAnswer;
+    this.isCorrect = answer === this.questions[this.currentIndex].reponseCorrecte;
     this.showResult = true;
     if (this.isCorrect) this.score++;
     //this.userAnswers[questionId] = answer;
@@ -72,7 +77,7 @@ export class Quiz implements OnInit {
   submitQuiz(): void {
     let correct = 0;
     this.questions.forEach(q => {
-      if (this.userAnswers[q.id!] === q.correctAnswer) {
+      if (this.userAnswers[q.id!] === q.reponseCorrecte) {
         correct++;
       }
     });
@@ -80,13 +85,14 @@ export class Quiz implements OnInit {
   }
 
   retrieveImage(file: File | undefined): any {
-    console.log('nom photo' + file?.name)
     return   'data:image/jpeg;base64,' + file;
   }
 
   nextQuestion(): void {
     this.showResult = false;
     this.selectedAnswer = null;
+    this.strSelectedAnswer = '';
+
 
     if (this.currentIndex < this.questions.length - 1) {
       this.currentIndex++;
@@ -103,4 +109,17 @@ export class Quiz implements OnInit {
     this.selectedAnswer = null;
   }
 
+
+  submitAnswer() {
+    if (!this.selectedAnswer) return;
+
+    // Appelle ton mécanisme existant
+    this.selectAnswer(this.questions[this.currentIndex].id!, this.strSelectedAnswer);
+
+    // Désactive la sélection après validation
+    this.showResult = true;
+
+    // Si tu veux reset selectedAnswer pour la prochaine question :
+    // this.selectedAnswer = null;
+  }
 }

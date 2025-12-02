@@ -4,13 +4,14 @@
   <!-- Formulaire -->
   <div class="form">
     <input [(ngModel)]="currentQuestion.intitule" placeholder="Texte de la question" />
-    <input [(ngModel)]="currentQuestion.examen" placeholder="Catégorie" />
+    <input [(ngModel)]="currentQuestion.examen" placeholder="examens" />
+    <input [(ngModel)]="currentQuestion.category" placeholder="Catégorie" />
     <textarea [(ngModel)]="currentQuestion.description" placeholder="description"></textarea>
     <input [(ngModel)]="currentQuestion.reponseA" placeholder="Réponse A" />
     <input [(ngModel)]="currentQuestion.reponseB" placeholder="Réponse B" />
     <input [(ngModel)]="currentQuestion.reponseC" placeholder="Réponse C" />
     <input [(ngModel)]="currentQuestion.reponseD" placeholder="Réponse D" />
-    <input [(ngModel)]="currentQuestion.correctAnswer" placeholder="Bonne réponse (A/B/C/D)" />
+    <input [(ngModel)]="currentQuestion.reponseCorrecte" placeholder="Bonne réponse (A/B/C/D)" />
 
     <input type="file" (change)="onFileChanged($event)" />
     <img *ngIf="previewUrl" [src]="previewUrl" width="200" alt="aperçu image" style="margin:10px 0;display:block;">
@@ -36,7 +37,7 @@
       <td>{{ q.id }}</td>
       <td>{{ q.category }}</td>
       <td>{{ q.intitule }}</td>
-      <td>{{ q.correctAnswer }}</td>
+      <td>{{ q.reponseCorrecte }}</td>
       <td>
         <button (click)="editQuestion(q)">✏️ Modifier</button>
         <button (click)="deleteQuestion(q.id!)">🗑️ Supprimer</button>

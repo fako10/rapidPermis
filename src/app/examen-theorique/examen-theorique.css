@@ -1,36 +1,260 @@
-.theory-exam {
-  padding: 2.5rem 1rem;
-  background: #f7f9fc;
-}
 
-.theory-exam .container {
-  max-width: 900px;
-  margin: 0 auto;
-}
 
-.theory-exam h2 {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================= */
+/* HERO SECTION */
+/* ============================= */
+.hero {
+  background: #eaf1ff;
+  padding: 60px 0;
   text-align: center;
-  color: #004aad;
-  margin-bottom: 2rem;
-  font-size: 1.9rem;
 }
 
-.block {
-  background: white;
-  margin: 0 7rem 1.5rem 7rem;
-  padding: 1.8rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
 }
 
-.block h3 {
+.hero p {
+  font-size: 1.25rem;
+  color: #555;
+}
+
+.hero .btn {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.hero .btn-primary:hover {
+  background-color: #0051cc;
+}
+
+.hero .btn-outline-light:hover {
+  color: #fff;
+  background-color: #0066ff;
+  border-color: #0066ff;
+}
+
+/* ============================= */
+/* SECTIONS & TITLES */
+/* ============================= */
+h1, h2, h3, h4 {
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
   margin-bottom: 1rem;
-  color: #004aad;
-  padding: 0 7rem;
 }
 
-.block p {
-  font-size: 1rem;
-  color: #333;
-  line-height: 1.6;
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ============================= */
+/* CARDS & FEATURES */
+/* ============================= */
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* GRID CARDS */
+.features-grid .feature-card {
+  padding: 2rem;
+  border-radius: 0.75rem;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.features-grid .feature-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ============================= */
+/* ALERTS / INFO BOXES */
+/* ============================= */
+.alert {
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.alert-info {
+  background-color: #e7f3ff;
+  color: #004aad;
+  border: none;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: none;
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+.btn {
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+
+.btn-primary {
+  background-color: #0066ff;
+  border-color: #0066ff;
+}
+
+.btn-primary:hover {
+  background-color: #0051cc;
+  border-color: #0051cc;
+}
+
+.btn-outline-light {
+  border-radius: 0.5rem;
+  border-width: 2px;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+.footer {
+  background-color: #f7f7f7;
+  padding: 25px 0;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #0066ff;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #004aad;
+}
+
+/* ============================= */
+/* TABLES, LISTS, OL / UL */
+/* ============================= */
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* ============================= */
+/* QCM / TESTS */
+/* ============================= */
+.qcm-card {
+  background-color: #fff;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.qcm-card ol li {
+  margin-bottom: 1rem;
+}
+
+/* ============================= */
+/* CTA SECTION */
+/* ============================= */
+.cta-section {
+  background-color: #0066ff;
+  color: #fff;
+  padding: 50px 0;
+  text-align: center;
+  border-radius: 0.75rem;
+}
+
+.cta-section .btn {
+  margin-top: 15px;
+}
+
+/* ============================= */
+/* RESPONSIVE MEDIA QUERIES */
+/* ============================= */
+@media (max-width: 991px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+}
+
+
+.prepa-section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+  padding: 0;
+}
+
+.prepa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.25rem;
+  justify-items: center;
 }

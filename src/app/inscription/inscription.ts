@@ -50,7 +50,7 @@ export class Inscription implements OnInit {
       this.utilisateur.userRole = 'USER';
       this.authService.registerUser(this.utilisateur).subscribe({
         next: (value) => {
-          console.log(value);
+
           this.isSuccessful = true;
           this.isSignUpFailed = false;
           // @ts-ignore

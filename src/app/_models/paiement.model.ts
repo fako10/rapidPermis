@@ -10,6 +10,11 @@ export class  Payement {
   amount?:              number;
   quantity?:            number;
   name?:                string;
+  code?:                string;
+
+  constructor(
+  ) {
+  }
 
 }
 

@@ -4,6 +4,11 @@ import {Router} from '@angular/router';
 import {GlobalConstants} from '../_commons/global.constants';
 import {Observable} from 'rxjs';
 import {loadStripe} from '@stripe/stripe-js';
+import {Payement} from '../_models/paiement.model';
+
+
+const baseUrl = GlobalConstants.baseUrl + "payment";
+const URL = GlobalConstants.baseUrl + "payment/register";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +22,22 @@ export class CheckoutService {
   constructor(private http: HttpClient,
               private router: Router) {
   }
+
+  async checkout(amount: number) {
+
+    const response: any = await this.http.post(`${baseUrl}/create-checkout-session`, { amount }).toPromise();
+
+    const stripe = await loadStripe(response.publicKey);
+    await stripe?.redirectToCheckout({ sessionId: response.id });
+  }
+
+
+  registerPayement(payement: Payement): Observable<Payement> {
+
+    // @ts-ignore
+    return this.http.post(`${URL}`, payement);
+  }
+
 
   callBackPay(payement: any): Observable<string> {
 

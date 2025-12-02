@@ -4,5 +4,6 @@ export class  Examen {
   title!:         string;
   questions!:     number;
   duration?:      number;
+  isAvailable?:   boolean;
 
 }

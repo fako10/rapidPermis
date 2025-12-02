@@ -1,10 +1,9 @@
 <section class="payment">
   <div class="container">
-    <h2>Paiement sécurisé</h2>
 
-
-    <div class="block">
-      <h2>Inscription</h2>
+    <div class="block" *ngIf="!showForgot">
+      <h2>Connexion
+      </h2>
 
       <form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
 
@@ -54,20 +53,47 @@
 
         <!-- Bouton -->
         <button type="submit" [disabled]="f.invalid">
-          S'inscrire
+          Se connecter
         </button>
       </form>
 
+      <div class="auth-links">
+        <a class="forgot-link" routerLink="/inscription">Créer un compte</a>
+        <a class="forgot-link" (click)="toggleForgot()">
+          Mot de passe oublié ?
+        </a>
+      </div>
+
       <p *ngIf="isLoggedIn" class="success">{{successfullMessage}}</p>
-      <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
+      <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
 
 
     </div>
 
+
+
+
+
+    <div *ngIf="showForgot" class="forgot-box">
+      <p>Entrez votre email pour recevoir votre mot de passe :</p>
+
+      <input type="email"
+             [(ngModel)]="forgotEmail"
+             (ngModelChange)="validateEmail()"
+             placeholder="Votre email"
+             class="forgot-input">
+
+      <div class="forgot-buttons-row">
+        <button (click)="sendForgot()" class="forgot-btn">Envoyer</button>
+
+        <button class="forgot-back-btn"
+                (click)="toggleForgot()">
+          ⬅ Retour
+        </button>
+      </div>
+
+      <p *ngIf="forgotMsg" class="forgot-msg">{{ forgotMsg }}</p>
+    </div>
+
   </div>
 </section>
-
-
-
-
-

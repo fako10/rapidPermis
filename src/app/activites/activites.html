@@ -1,0 +1,35 @@
+<div class="prepa-container">
+
+  <header class="prepa-header">
+    <h1 class="prepa-title">Catégorie :</h1>
+
+    <div class="prepa-buttons">
+      <button
+        class="prepa-btn prepa-btn-training"
+        (click)="retour()">
+       retour
+      </button>
+
+
+    </div>
+  </header>
+
+
+<div>
+
+  <div class="prepa-grid">
+    <div *ngFor="let cat of activites" class="prepa-card">
+      Signalisation
+      <div class="prepa-card-icon">{{ cat.id }}</div>
+      <div class="prepa-card-title">{{ cat.libelle }}</div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+</div>

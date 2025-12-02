@@ -1,0 +1,47 @@
+<section class="payment">
+  <div class="container">
+    <h2>Paiement sécurisé</h2>
+
+    <!-- Bloc 1 : Choix de l’offre -->
+    <div class="block">
+      <h3>📦 Choisissez votre formule</h3>
+      <p style="text-align: justify;">
+        Sélectionnez l’offre qui correspond le mieux à vos besoins : accès illimité à toutes les questions,
+        pack examen blanc ou formule complète avec suivi personnalisé. Chaque option est conçue pour vous
+        accompagner efficacement jusqu’à la réussite de votre permis.
+      </p>
+      <div class="offers">
+        <div class="offer">
+          <h4>Pack Découverte</h4>
+          <p>Accès 7 jours • 500 questions</p>
+          <p class="price">9,99 €</p>
+          <button class="btn" (click)="pay('DECOUVERTE', 999)">Choisir</button>
+        </div>
+        <div class="offer">
+          <h4>Pack Standard</h4>
+          <p>Accès 1 mois • 1500 questions + examens blancs</p>
+          <p class="price">19,99 €</p>
+          <button class="btn" (click)="pay('STANDARD', 1999)">Choisir</button>
+        </div>
+        <div class="offer">
+          <h4>Pack Confort</h4>
+          <p>Accès 3 mois • Tout inclus + suivi personnalisé</p>
+          <p class="price">29,99 €</p>
+          <button class="btn" (click)="pay('CONFORT', 2999)">Choisir</button>
+        </div>
+
+        <div class="offer">
+          <h4>Pack Premium</h4>
+          <p>Accès illimité • Tout inclus + suivi personnalisé</p>
+          <p class="price">39,99 €</p>
+          <button class="btn" (click)="pay('PREMIUM', 3999)">Choisir</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</section>

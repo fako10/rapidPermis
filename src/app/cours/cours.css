@@ -1,0 +1,17 @@
+.card {
+  border-radius: 0.75rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+}
+
+h1, h2 {
+  font-weight: 700;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+.form-check-label {
+  cursor: pointer;
+}

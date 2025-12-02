@@ -1,0 +1,171 @@
+/* === Conteneur global === */
+.prepa-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #f9fbff 0%, #ffffff 100%);
+  font-family: 'Inter', sans-serif;
+}
+
+/* === Header === */
+.prepa-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+@media (min-width: 768px) {
+  .prepa-header {
+    flex-direction: row;
+  }
+}
+
+.prepa-title {
+  color: #2563eb;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.prepa-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* === Boutons === */
+.prepa-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.prepa-btn-training {
+  background-color: #3b82f6;
+}
+.prepa-btn-training:hover {
+  background-color: #2563eb;
+}
+
+.prepa-btn-simulation {
+  background-color: #10b981;
+}
+.prepa-btn-simulation:hover {
+  background-color: #059669;
+}
+
+.prepa-btn-active {
+  opacity: 0.8;
+}
+
+/* === Contenu principal === */
+.prepa-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* === Section vide === */
+.prepa-empty {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+  margin-top: 3rem;
+}
+
+/* === Titres de section === */
+.prepa-section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1.5rem;
+}
+
+/* === Grille de cartes === */
+.prepa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.25rem;
+  justify-items: center;
+}
+
+/* === Cartes === */
+.prepa-card {
+  background-color: #ffffff;
+  border: 1px solid #f3f4f6;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.prepa-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Icônes dans cartes */
+.prepa-card-icon {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Titre carte */
+.prepa-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+/* Info carte */
+.prepa-card-info {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Bouton carte */
+.prepa-card-btn {
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.prepa-card-btn:hover {
+  background-color: #059669;
+}
+
+/* === Footer === */
+.prepa-footer {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+  border-top: 1px solid #f3f4f6;
+  padding: 1rem 0;
+  background-color: #ffffff;
+}
+
+
+.prepa-card.disabled {
+  opacity: 0.5;
+  pointer-events: none; /* empêche tout clic sur la carte */
+  filter: grayscale(100%);
+}

@@ -24,7 +24,20 @@ export class AuthService {
   loggedIn$ = this.loggedIn.asObservable();
 
   constructor(private http: HttpClient,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService) {
+    this.restoreLoginState();
+  }
+
+  restoreLoginState() {
+    const token = this.tokenStorageService.getToken();
+
+    if (token && !this.isTokenExpired()) {
+      this.loggedIn.next(true);
+    } else {
+      this.loggedIn.next(false);
+      this.logout(); // nettoie token expiré
+    }
+  }
 
   login(email: string | undefined, password: string): Observable<any> {
 

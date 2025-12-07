@@ -10,6 +10,8 @@ import {GlobalConstants} from '../_commons/global.constants';
 import {CheckoutService} from '../_services/checkout.service';
 import {Activite} from '../_models/activite.model';
 import {QuestionService} from '../_services/question.service';
+import {Attempt} from '../_models/attempt.model';
+import {AttemptService} from '../_services/attempt.service';
 
 
 @Component({
@@ -35,33 +37,44 @@ export class PreparationTheorie implements OnInit {
   error: string | null = null;
   categorieCourante!: Category;
   popupVisible = false;
+  attempts: Attempt[] = [];
 
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
               private checkoutService: CheckoutService,
               private router: Router,
-              private questionService: QuestionService
+              private questionService: QuestionService,
+              private attemptService: AttemptService
              ) {
   }
 
   ngOnInit(): void {
     this.connectedUser = this.tokenStorage.getUser();
     this.isEnabled = this.connectedUser.enabled || false;
+    this.loadAttempts();
   }
 
+  loadAttempts(): void {
+    this.attemptService.getUserAttempts().subscribe({
+      next: (data) => {
+        this.attempts = data;
+      },
+      error: (err) => console.error('Erreur lors du chargement des questions', err)
+    });
+  }
 
   categories: Category[] = [
-    {id: 1, name: 'Panneaux', icon: '🚦'},
-    {id: 2, name: 'Priorités', icon: '🚗'},
-    {id: 3, name: 'Écoconduite', icon: '🌱'},
-    {id: 4, name: 'Signalisation', icon: '⚙️'},
-    {id: 5, name: 'Règles générales', icon: '📘'},
-    {id: 6, name: 'Stationnement', icon: '🅿️'},
-    {id: 7, name: 'Sécurité', icon: '🦺'},
-    {id: 8, name: 'Premiers secours', icon: '⛑️'},
-    {id: 9, name: 'Mécanique', icon: '🔧'},
-    {id: 10, name: 'Conduite écologique', icon: '🌍'},
+    {id: 1, name: 'La circulation routière', icon: '🚗', groupe:'circulation_routiere'},
+    {id: 2, name: 'Le conducteur', icon: '🧑‍✈️ / 🚘', groupe:'conducteur'},
+    {id: 3, name: 'La route', icon: '🛣️', groupe:'route'},
+    {id: 4, name: 'Les autres usagers', icon: '🚴‍♂️/🛵 /🚶‍♂️', groupe:'usagers'},
+    {id: 5, name: 'régles générales', icon: '📘 / 📚', groupe:'regles_generales'},
+    {id: 6, name: 'Premiers secours', icon: '⛑️', groupe:'premiers_secours'},
+    {id: 7, name: 'Prendre et quitter son véhicule', icon: '🔑/🚗', groupe:'prendre_quitter_vehicule'},
+    {id: 8, name: 'Mécanique et entretien du véhicule', icon: '🔧 / 🛠️', groupe:'mecanique'},
+    {id: 9, name: 'Sécurité conducteur et routière', icon: '🦺/🚨', groupe:'securite'},
+    {id: 10, name: 'Environnement et écoconduite', icon: '🌍/🌱', groupe:'environnement'},
   ];
 
   simulations: Examen[] = [
@@ -86,8 +99,8 @@ export class PreparationTheorie implements OnInit {
   }
 
   startSimulation(sim: Examen) {
-
-    // navigation ex: this.router.navigate(['/exam', sim.id]);
+    // navigation ex:
+    this.router.navigate(['/examen', sim.id]);
   }
 
 
@@ -120,7 +133,7 @@ export class PreparationTheorie implements OnInit {
     this.activites = [];
     this.categorieCourante = categorie;
 
-    this.questionService.getActiviteCategory(this.categorieCourante.name).subscribe({
+    this.questionService.getActiviteCategory(this.categorieCourante.groupe).subscribe({
         next: (data) => {
           this.activites = data;
           this.loading = false;

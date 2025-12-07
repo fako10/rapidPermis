@@ -53,14 +53,16 @@ export class App implements  OnInit{
 
   }
 
+  gotoAccueil() {
+    this.router.navigateByUrl(`accueil`);
+  }
+
   gotoPreparation() {
     if (this.isLoggedIn) {
       this.router.navigateByUrl(`preparation`);
     } else  {
       this.router.navigateByUrl(`connexion`);
     }
-
-
   }
 
   goToAccount() {

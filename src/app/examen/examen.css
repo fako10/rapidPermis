@@ -1,5 +1,79 @@
 .exam-container { max-width: 800px; margin: 20px auto; padding: 16px; background: #fff; border-radius: 8px; box-shadow: 0 0 6px #ccc; }
 .timer { font-size: 1.2rem; margin-bottom: 10px; }
-.question-block { margin-bottom: 12px; }
+.questions-block {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden; /* sécurité supplémentaire */
+  text-align: center;
+}
+
+.questions-block img {
+  width: 100%;        /* force l'image à ne jamais dépasser */
+  max-width: 100%;    /* limite stricte */
+  height: auto;       /* garde les proportions */
+  max-height: 300px;  /* limite la hauteur */
+  object-fit: contain; /* empêche la déformation */
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
 .answers label { display: block; margin: 8px 0; }
-.controls { margin-top: 12px; }
+.controls {
+  margin-top: 12px;
+  display: flex;
+  gap: 15px; /* espace entre les deux boutons */
+}
+.prepa-question-img {
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto 20px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  display: block;
+}
+
+
+.answers {
+  display: grid;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.answer-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 2px solid #dcdcdc;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fafafa;
+  transition: 0.25s ease;
+  font-size: 17px;
+}
+
+.answer-card:hover {
+  border-color: #007bff;
+  background: #eef6ff;
+}
+
+.answer-card input[type="radio"] {
+  transform: scale(1.3);
+  accent-color: #007bff;   /* couleur moderne */
+  cursor: pointer;
+}
+
+/* Lettre A B C D */
+.answer-card .letter {
+  font-weight: 600;
+  color: #444;
+  width: 28px;
+}
+
+/* Effet lors de la sélection */
+.answer-card input[type="radio"]:checked + .letter,
+.answer-card input[type="radio"]:checked ~ .text {
+  color: #007bff;
+  font-weight: bold;
+}

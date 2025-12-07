@@ -12,20 +12,22 @@ import {Success} from './success/success';
 import {Activites} from './activites/activites';
 import {Tarifs} from './tarifs/tarifs';
 import {Cours} from './cours/cours';
+import {FreeTest} from './free-test/free-test';
 
 export const routes: Routes = [
   { path: '', component: Accueil },
-  { path: 'accueil', component: Accueil },
+  //{ path: 'accueil', component: Accueil },
   { path: 'inscription', component: Inscription },
   { path: 'connexion', component: Connexion },
   { path: 'quiz/activite/:id', component: Quiz },
   { path: 'question-admin', component: QuestionAdmin },
-  { path: 'examen', component: Examen },
+  { path: 'examen/:id', component: Examen },
   { path: 'preparation', component: PreparationTheorie },
   { path: 'mon-compte', component: MonCompte },
   { path: 'cours', component: ExamenTheorique },
   { path: 'activites/:category', component: Activites },
   { path: 'tarifs', component: Tarifs },
   { path: 'cours/theme/:id', component: Cours },
+  { path: 'free-test', component: FreeTest },
   { path: 'success', component: Success }
 ];

@@ -85,7 +85,7 @@
         <div
           *ngFor="let sim of simulations"
           class="prepa-card"
-          [ngClass]="{ 'disabled': !isEnabled }"
+          [ngClass]="{ 'disabled': isEnabled }"
         >
           <div class="prepa-card-title">{{ sim.title }}</div>
           <div class="prepa-card-info">
@@ -94,7 +94,7 @@
           <button
             class="prepa-card-btn"
             (click)="startSimulation(sim)"
-            [disabled]="!sim.isAvailable"
+            [disabled]="sim.isAvailable"
           >
             Commencer
           </button>
@@ -103,6 +103,21 @@
 
       <br>
       <h2 class="prepa-section-title">🎯 historique des examens passés</h2>
+      <div class="prepa-grid">
+        <div
+          *ngFor="let sim of attempts"
+          class="prepa-card"
+          [ngClass]="{ 'disabled': isEnabled }"
+        >
+          <div class="prepa-card-title">{{ sim.examenName }}</div>
+          <div class="prepa-card-info">
+            {{ sim.score }} / {{ sim.totalQuestions }} min
+          </div>
+
+            Commencer
+
+        </div>
+      </div>
 
     </div>
 

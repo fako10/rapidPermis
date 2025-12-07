@@ -1,23 +1,28 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Question} from '../_models/question.model';
 import {interval, Subscription} from 'rxjs';
 import {ExamenService} from '../_services/examen.service';
-import {JsonPipe, NgIf} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Utilisateur} from '../_models/utilisateur.model';
+import {AuthService} from '../_services/auth.service';
+import {TokenStorageService} from '../_services/token.storage.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgIf} from '@angular/common';
+import {EnregistrerPaiement} from '../_models/enregistrer.paiement';
 
 @Component({
-  selector: 'app-examen',
+  selector: 'app-free-test',
   imports: [
-    NgIf,
     FormsModule,
-    JsonPipe
+    NgIf,
+    ReactiveFormsModule
   ],
-  templateUrl: './examen.html',
+  templateUrl: './free-test.html',
   standalone: true,
-  styleUrl: './examen.css'
+  styleUrl: './free-test.css'
 })
-export class Examen implements OnInit, OnDestroy {
+export class FreeTest implements OnInit {
+
 
   questions: Question[] = [];
   currentIndex = 0;
@@ -32,26 +37,46 @@ export class Examen implements OnInit, OnDestroy {
   utterance: SpeechSynthesisUtterance | null = null;
   ttsEnabled = true;
 
+  isLoggedIn = false;
+  username?: string;
+  connectedUser!: Utilisateur;
+  started = false;
+
+
+
+  utilisateur!: Utilisateur;
+  enregistrementPaiement !: EnregistrerPaiement;
+  isFormInValid = false;
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+  successfullMessage = '';
+  userType !: string;
+  confirmationMotDePasse = '';
+
   constructor(private examService: ExamenService,
+              private authService: AuthService,
+              private tokenStorageService: TokenStorageService,
+              private router : Router,
               private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    /*this.speech = window.speechSynthesis;
-    window.speechSynthesis.onvoiceschanged = () => {
-      console.log("Voix chargées");
-      // relire la question si besoin
-      if (this.questions.length > 0) {
-        this.speakCurrentQuestion();
-      }
-    };*/
-    const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.startExam(id); // démarre par défaut, ou tu peux attendre action utilisateur
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      this.startExam();
+    } else {
+
+    }
+
+    // démarre par défaut, ou tu peux attendre action utilisateur
   }
 
-  startExam(id : number) {
+  startExam() {
     this.startedAt = new Date().toISOString();
-    this.examService.startExam(id).subscribe({
+    const category = '';
+    const nbr = 50;
+    this.examService.startTraining(category, nbr).subscribe({
       next: data => {
         this.questions = data;
         this.questions.forEach(q => this.userAnswers[q.id!] = null);
@@ -159,5 +184,38 @@ export class Examen implements OnInit, OnDestroy {
 
   retrieveImage(file: File | undefined): any {
     return   'data:image/jpeg;base64,' + file;
+  }
+
+
+
+
+
+  onSubmit(): void {
+
+    if(this.confirmationMotDePasse != this.utilisateur.password) {
+      this.isFormInValid = true
+    } else {
+      this.utilisateur.userRole = 'USER';
+      this.authService.registerUser(this.utilisateur).subscribe({
+        next: (value) => {
+
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
+          // @ts-ignore
+          this.authService.savePassword(this.utilisateur.password);
+          this.successfullMessage = "Inscription réussie ✅";
+          this.router.navigateByUrl(`connexion`);
+        },
+        error: e => {
+          this.isSignUpFailed = true;
+          this.errorMessage = e.error.message;
+        }
+      });
+      //this.router.navigateByUrl('/acceuil');
+    }
+  }
+
+  start(): void {
+    this.started  = true;
   }
 }

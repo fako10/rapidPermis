@@ -16,7 +16,6 @@ const apiConnectedUserPayment = GlobalConstants.baseUrl + "payment/connected-use
 })
 export class PaymentService {
 
-  private api = 'http://localhost:8080/api/abonnement/connected-user';
 
   constructor(private http: HttpClient) {}
 

@@ -1,0 +1,144 @@
+<div *ngIf="isLoggedIn">
+
+  <div class="d-flex justify-content-center mt-5" *ngIf="!started">
+    <div class="card shadow-lg p-4 text-center" style="max-width: 420px; border-radius: 16px;">
+      <h3 class="mb-3 fw-bold">Prêt pour l'examen ?</h3>
+      <p class="text-muted">Vous aurez 15 secondes par question. Bonne chance !</p>
+
+      <button
+        class="btn btn-primary btn-lg mt-3 w-100"
+        style="border-radius: 10px;"
+        (click)="start()"
+      >
+        🚀 Lancer l'examen
+      </button>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="started">
+  <div class="exam-container" *ngIf="questions.length && !isFinished">
+    <h2>Examen pratique — question {{ currentIndex + 1 }} / {{ questions.length }}</h2>
+
+    <div class="timer">Temps restant : <strong>{{ timeLeft }}</strong> s</div>
+
+    <div class="question-block">
+      <p class="question-text">{{ questions[currentIndex].intitule }}</p>
+      <img [src]="retrieveImage(questions[currentIndex].photo)" alt="Image" />
+    </div>
+
+    <div class="answers">
+      <label><input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'A')" [checked]="userAnswers[questions[currentIndex].id] === 'A'"> A) {{ questions[currentIndex].reponseA }}</label>
+      <label><input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'B')" [checked]="userAnswers[questions[currentIndex].id] === 'B'"> B) {{ questions[currentIndex].reponseB }}</label>
+      <label><input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'C')" [checked]="userAnswers[questions[currentIndex].id] === 'C'"> C) {{ questions[currentIndex].reponseC }}</label>
+      <label><input type="radio" name="q{{questions[currentIndex].id}}" (change)="selectAnswer(questions[currentIndex].id!, 'C')" [checked]="userAnswers[questions[currentIndex].id] === 'D'"> D) {{ questions[currentIndex].reponseD }}</label>
+    </div>
+
+    <div class="controls">
+      <!--<button (click)="prevQuestion()" [disabled]="currentIndex === 0">⬅️ Précédent</button>-->
+      <button (click)="nextQuestion()">Suivant ➡️</button>
+      <button (click)="finishExam()">Terminer maintenant</button>
+      <!--<label><input type="checkbox" [(ngModel)]="ttsEnabled"> Voix (lire les questions)</label>-->
+   </div>
+ </div>
+
+ <div *ngIf="isFinished">
+   <h2>Examen terminé</h2>
+   <p>Score : {{ result?.score }} / {{ result?.totalQuestions }}</p>
+
+
+ </div>
+
+</div>
+
+
+</div>
+
+<div *ngIf="!isLoggedIn">
+
+   <div class="container">
+
+     <div class="block">
+       <h3>Veuillez vous inscrire avant de faire le test</h3>
+
+       <form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
+
+         <!-- Email -->
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              [(ngModel)]="utilisateur.email"
+              #email="ngModel"
+              required
+              email
+              placeholder="exemple@mail.com"
+              class="form-control">
+
+            <!-- Erreurs email -->
+            <div class="error" *ngIf="email.invalid && email.touched">
+              <div *ngIf="email.errors?.['required']">L’email est requis</div>
+              <div *ngIf="email.errors?.['email']">Format de l’email invalide</div>
+            </div>
+          </div>
+
+          <!-- Mot de passe -->
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              [(ngModel)]="utilisateur.password"
+              #password="ngModel"
+              required
+              minlength="6"
+              placeholder="••••••••"
+              class="form-control">
+
+            <!-- Erreurs password -->
+            <div class="error" *ngIf="password.invalid && password.touched">
+              <div *ngIf="password.errors?.['required']">Le mot de passe est requis</div>
+              <div *ngIf="password.errors?.['minlength']">Au moins 6 caractères</div>
+            </div>
+          </div>
+
+          <!-- Confirmation -->
+          <div class="form-group">
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              [(ngModel)]="confirmationMotDePasse"
+              #confirm="ngModel"
+              required
+              placeholder="••••••••"
+              class="form-control">
+
+            <!-- Erreurs confirmation -->
+            <div class="error" *ngIf="confirm.touched">
+              <div *ngIf="confirm.errors?.['required']">La confirmation est requise</div>
+              <div *ngIf="utilisateur.password !== confirmationMotDePasse">Les mots de passe ne correspondent pas</div>
+            </div>
+          </div>
+
+          <!-- Bouton -->
+          <button type="submit" [disabled]="f.invalid || utilisateur.password !== confirmationMotDePasse">
+            S'inscrire
+          </button>
+        </form>
+
+        <p *ngIf="successfullMessage">{{successfullMessage}}</p>
+        <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
+
+
+      </div>
+
+    </div>
+
+</div>
+

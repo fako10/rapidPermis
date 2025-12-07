@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Theme, THEMES} from '../_models/themes.model';
 import {NgForOf, NgIf} from '@angular/common';
 
@@ -7,7 +7,8 @@ import {NgForOf, NgIf} from '@angular/common';
   selector: 'app-cours',
   imports: [
     NgIf,
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './cours.html',
   standalone: true,

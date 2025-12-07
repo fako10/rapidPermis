@@ -1,27 +1,17 @@
-<div class="container py-5" *ngIf="theme">
-  <h1 class="fw-bold mb-4">{{ theme?.title }}</h1>
+<section>
+  <div class="block" *ngIf="theme">
 
-  <!-- Sections du cours -->
-  <section *ngFor="let section of theme.sections" class="mb-5">
-    <h2 class="fw-bold mb-3">{{ section.title }}</h2>
-    <div class="card shadow-sm p-4 mb-3">
-      <p *ngFor="let p of section.content">{{ p }}</p>
-    </div>
-  </section>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4" *ngFor="let section of theme.sections">
+        <div class="card shadow-sm h-100">
+          <div class="card-body text-center">
+            <h4 class="fw-bold">{{ section.title }}</h4>
+            <p class="text-muted">{{ section.content }}</p>
 
-  <!-- QCM -->
-  <section class="mb-5">
-    <h2 class="fw-bold mb-3">QCM – Testez vos connaissances</h2>
-    <div *ngFor="let q of theme.qcm; let i = index" class="card shadow-sm p-4 mb-3">
-      <p class="fw-bold">{{ q.question }}</p>
-      <div *ngFor="let option of q.options; let j = index" class="form-check mb-2">
-        <input type="radio" class="form-check-input" name="q{{i}}" id="q{{i}}o{{j}}" (click)="checkAnswer(i,j)">
-        <label class="form-check-label" for="q{{i}}o{{j}}">{{ option }}</label>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
-</div>
 
-<div *ngIf="!theme" class="text-center py-5">
-  <p class="text-muted">Thème introuvable.</p>
-</div>
+  </div>
+</section>

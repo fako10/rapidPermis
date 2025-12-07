@@ -9,7 +9,8 @@ export class GlobalConstants {
 
   //public  static baseUrl : string = 'http://localhost:8080/api/';
 
-  public  static baseUrl : string = 'https://localhost:8080/api/';
+  public  static baseUrl : string = 'http://localhost:8080/api/';
+  //public  static baseUrl : string = 'https://localhost:8080/api/';
   //public  static baseUrl : string = 'https://www.monpermisenpoche.fr/api/';
 
 

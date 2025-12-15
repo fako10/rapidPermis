@@ -58,6 +58,8 @@ export class App implements  OnInit{
   }
 
   gotoPreparation() {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    console.log('isloggedIn ' + this.isLoggedIn);
     if (this.isLoggedIn) {
       this.router.navigateByUrl(`preparation`);
     } else  {

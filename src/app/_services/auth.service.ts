@@ -39,12 +39,13 @@ export class AuthService {
     }
   }
 
-  login(email: string | undefined, password: string): Observable<any> {
+  login(email: string | undefined, password: string, username: string | undefined): Observable<any> {
 
     //this.loggedIn.next(true);
     return this.http.post(AUTH_API + 'login', {
       email,
-      password
+      password,
+      username
     }, httpOptions);
   }
 

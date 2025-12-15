@@ -51,7 +51,7 @@ export class Connexion implements OnInit {
   onSubmit() {
     console.log('je suis ici')
     this.utilisateur.username = this.utilisateur.email;
-    this.authService.login(this.utilisateur.username, this.utilisateur.password).subscribe({
+    this.authService.login(this.utilisateur.username, this.utilisateur.password, this.utilisateur.username).subscribe({
       complete: () => {
 
       },

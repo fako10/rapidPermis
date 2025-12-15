@@ -5,6 +5,8 @@ import {Question} from '../_models/question.model';
 import {GlobalConstants} from '../_commons/global.constants';
 import {Activites} from '../activites/activites';
 import {Activite} from '../_models/activite.model';
+import {Answer} from '../_models/answer.model';
+import {Attempt} from '../_models/attempt.model';
 
 
 
@@ -19,6 +21,8 @@ export class QuestionService {
   private urlActivites = GlobalConstants.baseUrl + "questions/activites/";
   private urlactiviteCategory = GlobalConstants.baseUrl + "activite/category/";
   private urlQuestionsByActivites = GlobalConstants.baseUrl + "activite/questions/";
+  private urlAnswersByExamen = GlobalConstants.baseUrl + "attempt/answers/";
+  private urlAttemptById = GlobalConstants.baseUrl + "attempt/answers/";
   //private apiUrl = 'http://localhost:8080/api/questions';
   //private saveUrl = 'http://localhost:8080/api/questions/save';
   //private urlSaveFichier = 'http://localhost:8080/api/questions/saveQuestionFile';
@@ -29,6 +33,14 @@ export class QuestionService {
   getAllQuestions(): Observable<Question[]> {
     return this.http.get<Question[]>(this.apiUrl);
   }
+
+  getAllAnswersByExamen(id : number) : Observable<Answer[]> {
+  return this.http.get<Answer[]>(`${this.urlAnswersByExamen}${id}`);
+}
+
+getAttempById(id: number) : Observable<Attempt> {
+  return this.http.get<Attempt>(`${this.urlAttemptById}${id}`);
+}
 
   getQuestionsByActivite(id : number): Observable<Question[]> {
     return this.http.get<Activite[]>(`${this.urlQuestionsByActivites}${id}`);

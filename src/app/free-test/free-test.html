@@ -17,15 +17,27 @@
 
 
 
-  <div *ngIf="started">
+  <div *ngIf="started" class="exam-page">
   <div class="exam-container" *ngIf="questions.length && !isFinished">
+
+    <div class="progress-wrapper">
+      <div
+        class="progress-bar"
+        [style.width.%]="((currentIndex + 1) / questions.length) * 100"
+      ></div>
+    </div>
     <h2>Examen pratique — question {{ currentIndex + 1 }} / {{ questions.length }}</h2>
 
     <div class="timer">Temps restant : <strong>{{ timeLeft }}</strong> s</div>
 
     <div class="question-block">
+      <div class="image-frame">
+        <img
+          [src]="retrieveImage(questions[currentIndex].photo)"
+          alt="Illustration question"
+        />
+      </div>
       <p class="question-text">{{ questions[currentIndex].intitule }}</p>
-      <img [src]="retrieveImage(questions[currentIndex].photo)" alt="Image" />
     </div>
 
     <div class="answers">
@@ -131,6 +143,11 @@
             S'inscrire
           </button>
         </form>
+
+
+       <div class="auth-links">
+         <a class="forgot-link" routerLink="/connexion">Connexion</a>
+       </div>
 
         <p *ngIf="successfullMessage">{{successfullMessage}}</p>
         <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>

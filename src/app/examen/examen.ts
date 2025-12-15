@@ -31,6 +31,7 @@ export class Examen implements OnInit, OnDestroy {
   speech: SpeechSynthesis | null = null;
   utterance: SpeechSynthesisUtterance | null = null;
   ttsEnabled = true;
+  examId!: number;
 
   constructor(private examService: ExamenService,
               private route: ActivatedRoute) {}
@@ -45,7 +46,7 @@ export class Examen implements OnInit, OnDestroy {
       }
     };*/
     const id = Number(this.route.snapshot.paramMap.get('id'));
-
+    this.examId = id;
     this.startExam(id); // démarre par défaut, ou tu peux attendre action utilisateur
   }
 
@@ -131,11 +132,15 @@ export class Examen implements OnInit, OnDestroy {
       questionId: +k,
       givenAnswer: this.userAnswers[+k]
     }));
+
     const payload = {
       userId: this.getCurrentUserId(), // méthode à adapter
       startedAt: this.startedAt,
-      answers: answersPayload
+      answers: answersPayload,
+      examenId: this.examId
     };
+
+    console.log("Payload envoyé :", payload);
     this.examService.submitAttempt(payload).subscribe({
       next: res => {
         this.result = res;

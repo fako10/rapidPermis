@@ -13,6 +13,7 @@ import {Activites} from './activites/activites';
 import {Tarifs} from './tarifs/tarifs';
 import {Cours} from './cours/cours';
 import {FreeTest} from './free-test/free-test';
+import {ResulatExamen} from './resulat-examen/resulat-examen';
 
 export const routes: Routes = [
   { path: '', component: Accueil },
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'activites/:category', component: Activites },
   { path: 'tarifs', component: Tarifs },
   { path: 'cours/theme/:id', component: Cours },
+  { path: 'resultat-examen/:id', component: ResulatExamen },
   { path: 'free-test', component: FreeTest },
   { path: 'success', component: Success }
 ];

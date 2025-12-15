@@ -5,7 +5,7 @@ export class  Answer {
 
   id!:              number;
   attemptId!:       number;
-  QuestionDto!:     Question;
+  question!:     Question;
   examenName!:      string;
   givenAnswer!:     string;
   correct!:         string;

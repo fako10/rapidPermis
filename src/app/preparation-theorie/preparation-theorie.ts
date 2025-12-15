@@ -12,6 +12,7 @@ import {Activite} from '../_models/activite.model';
 import {QuestionService} from '../_services/question.service';
 import {Attempt} from '../_models/attempt.model';
 import {AttemptService} from '../_services/attempt.service';
+import {Question} from '../_models/question.model';
 
 
 @Component({
@@ -46,8 +47,7 @@ export class PreparationTheorie implements OnInit {
               private router: Router,
               private questionService: QuestionService,
               private attemptService: AttemptService
-             ) {
-  }
+             ) {}
 
   ngOnInit(): void {
     this.connectedUser = this.tokenStorage.getUser();
@@ -78,16 +78,16 @@ export class PreparationTheorie implements OnInit {
   ];
 
   simulations: Examen[] = [
-    {id: 1, title: 'Examen blanc 1', questions: 20, duration: 15, isAvailable: false},
-    {id: 2, title: 'Examen blanc 2', questions: 30, duration: 20, isAvailable: false},
-    {id: 3, title: 'Examen blanc 3', questions: 40, duration: 20, isAvailable: false},
-    {id: 4, title: 'Examen blanc 4', questions: 60, duration: 20, isAvailable: false},
-    {id: 5, title: 'Examen blanc 4', questions: 60, duration: 20, isAvailable: false},
-    {id: 6, title: 'Examen blanc 4', questions: 60, duration: 20, isAvailable: false},
-    {id: 7, title: 'Examen blanc 4', questions: 60, duration: 20, isAvailable: false},
-    {id: 8, title: 'Examen blanc 4', questions: 60, duration: 20, isAvailable: false},
-    {id: 9, title: 'Examen blanc 4', questions: 60, duration: 20, isAvailable: false},
-    {id: 10, title: 'Examen blanc 4', questions: 60, duration: 20, isAvailable: false},
+    {id: 1, title: 'Examen blanc 1', questions: 40, duration: 10, isAvailable: false},
+    {id: 2, title: 'Examen blanc 2', questions: 40, duration: 10, isAvailable: false},
+    {id: 3, title: 'Examen blanc 3', questions: 40, duration: 10, isAvailable: false},
+    {id: 4, title: 'Examen blanc 4', questions: 40, duration: 10, isAvailable: false},
+    {id: 5, title: 'Examen blanc 4', questions: 40, duration: 10, isAvailable: false},
+    {id: 6, title: 'Examen blanc 4', questions: 40, duration: 10, isAvailable: false},
+    {id: 7, title: 'Examen blanc 4', questions: 40, duration: 10, isAvailable: false},
+    {id: 8, title: 'Examen blanc 4', questions: 40, duration: 10, isAvailable: false},
+    {id: 9, title: 'Examen blanc 4', questions: 40, duration: 10, isAvailable: false},
+    {id: 10, title: 'Examen blanc 4', questions: 40, duration: 10, isAvailable: false},
   ];
 
   selectMode(mode: 'training' | 'simulation' | 'payment') {
@@ -102,6 +102,8 @@ export class PreparationTheorie implements OnInit {
     // navigation ex:
     this.router.navigate(['/examen', sim.id]);
   }
+
+
 
 
   pay(libelle: string, amount: number) {
@@ -154,6 +156,12 @@ export class PreparationTheorie implements OnInit {
     this.popupVisible = false;
     this.router.navigateByUrl(`quiz/activite/`);
     this.router.navigate(['quiz/activite/', act]);
+  }
+
+  lancerLaVisualisation(attempt : Attempt) {
+    sessionStorage.setItem("attempt", JSON.stringify(attempt));
+    this.router.navigateByUrl(`resultat-examen/`);
+    this.router.navigate(['resultat-examen/', attempt.id]);
   }
 
 }

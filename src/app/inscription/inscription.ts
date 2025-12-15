@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Utilisateur} from '../_models/utilisateur.model';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {AuthService} from '../_services/auth.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EnregistrerPaiement} from '../_models/enregistrer.paiement';
@@ -13,7 +13,8 @@ import {CommonModule, NgClass, NgIf} from '@angular/common';
   imports: [
     FormsModule,
     CommonModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   styleUrl: './inscription.css'
 })

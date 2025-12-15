@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Question} from '../_models/question.model';
 import {interval, Subscription} from 'rxjs';
 import {ExamenService} from '../_services/examen.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {Utilisateur} from '../_models/utilisateur.model';
 import {AuthService} from '../_services/auth.service';
 import {TokenStorageService} from '../_services/token.storage.service';
@@ -15,7 +15,8 @@ import {EnregistrerPaiement} from '../_models/enregistrer.paiement';
   imports: [
     FormsModule,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './free-test.html',
   standalone: true,
@@ -62,6 +63,7 @@ export class FreeTest implements OnInit {
 
   ngOnInit(): void {
 
+    this.utilisateur = new Utilisateur();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       this.startExam();

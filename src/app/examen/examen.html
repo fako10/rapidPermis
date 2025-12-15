@@ -71,9 +71,24 @@
   </div>
 </div>
 
-<div *ngIf="isFinished">
-  <h2>Examen terminé</h2>
-  <p>Score : {{ result?.score }} / {{ result?.totalQuestions }}</p>
-  <pre>{{ result | json }}</pre>
+<div *ngIf="isFinished" class="exam-result-card">
+  <h2 class="title">🎉 Examen terminé</h2>
 
+  <p class="score">
+    Score :
+    <span class="score-value">{{ result?.score }}</span>
+    /
+    <span class="score-total">{{ result?.totalQuestions }}</span>
+  </p>
+
+  <div class="progress-bar-wrapper">
+    <div
+      class="progress-bar-fill"
+      [style.width.%]="(result?.score / result?.totalQuestions) * 100">
+    </div>
+  </div>
+
+  <button class="retry-btn" routerLink="/preparation">
+    Recommencer un examen
+  </button>
 </div>

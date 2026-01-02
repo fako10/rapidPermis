@@ -1,14 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {Theme, THEMES} from '../_models/themes.model';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {TokenStorageService} from '../_services/token.storage.service';
+import {Utilisateur} from '../_models/utilisateur.model';
 
 @Component({
   selector: 'app-cours',
   imports: [
     NgIf,
     NgForOf,
-    RouterLink
+    RouterLink,
+    NgClass
   ],
   templateUrl: './cours.html',
   standalone: true,
@@ -17,12 +20,26 @@ import {NgForOf, NgIf} from '@angular/common';
 export class Cours implements OnInit{
 
   theme!: Theme | undefined;
+  connectedUser!: Utilisateur;
+  isEnabled: boolean = false;
 
-  constructor(private route: ActivatedRoute) {}
+
+  constructor(private route: ActivatedRoute,
+              private tokenStorage: TokenStorageService,
+              private router: Router
+  ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.theme = THEMES.find(t => t.id === id);
+    this.connectedUser = this.tokenStorage.getUser();
+    this.isEnabled = this.connectedUser.locked || false;
+    if (!this.isEnabled) {
+      // Redirection vers la route 'cours'
+      this.router.navigate(['/cours']);
+    } else {
+      const id = Number(this.route.snapshot.paramMap.get('id'));
+      this.theme = THEMES.find(t => t.id === id);
+    }
+
   }
 
   checkAnswer(qIndex: number, selectedIndex: number) {

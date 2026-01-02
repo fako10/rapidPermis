@@ -1,16 +1,68 @@
-<section>
-  <div class="block" *ngIf="theme">
+<section *ngIf="theme">
+  <div class="block">
 
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4" *ngFor="let section of theme.sections">
+    <div class="mb-4">
+      <a
+        routerLink="/cours"
+        class="btn btn-outline-secondary"
+      >
+        ← Retour aux cours
+      </a>
+    </div>
+
+    <!-- TITRE DU THÈME -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">{{ theme.title }}</h2>
+      <hr class="w-25 mx-auto">
+    </div>
+
+    <!-- SECTIONS DU THÈME -->
+    <div class="row g-4 mb-5">
+      <div
+        class="col-md-6 col-lg-4"
+        *ngFor="let section of theme.sections"
+        [ngClass]="{ 'disabled': !isEnabled }"
+      >
         <div class="card shadow-sm h-100">
           <div class="card-body text-center">
             <h4 class="fw-bold">{{ section.title }}</h4>
             <p class="text-muted">{{ section.content }}</p>
-
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- ===================== -->
+    <!-- SECTION PANNEAUX -->
+    <!-- ===================== -->
+    <div *ngIf="theme.roadSigns?.length">
+
+      <div class="text-center mb-4">
+        <h3 class="fw-bold">Panneaux</h3>
+        <p class="text-muted">
+          Les principaux panneaux liés à ce thème
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3" *ngFor="let sign of theme.roadSigns">
+          <div class="card h-100 shadow-sm text-center">
+            <div class="card-body">
+              <img
+                [src]="sign.image"
+                [alt]="sign.title"
+                class="img-fluid mb-3"
+                style="max-height: 120px;"
+              />
+              <h5 class="fw-bold">{{ sign.title }}</h5>
+              <p class="text-muted small">
+                {{ sign.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>

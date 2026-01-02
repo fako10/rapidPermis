@@ -4,10 +4,23 @@ export interface Section {
   content: string[];
 }
 
+export interface RoadSign {
+  image: string;      // chemin de l’image
+  title: string;      // nom du panneau
+  description: string; // signification
+}
+
 export interface QcmQuestion {
   question: string;
   options: string[];
   answer: number; // index de la réponse correcte
+}
+
+export interface ThemeCard {
+  id: number;
+  title: string;
+  description: string;
+  enabled: boolean;
 }
 
 export interface Theme {
@@ -15,6 +28,7 @@ export interface Theme {
   title: string;
   sections: Section[];
   qcm: QcmQuestion[];
+  roadSigns?: RoadSign[];
 }
 
 export const THEMES: Theme[] = [
@@ -46,6 +60,26 @@ export const THEMES: Theme[] = [
           'Signaler le dépassement, effectuer la manœuvre rapidement mais en sécurité, puis se rabattre.'
         ]}
     ],
+
+    roadSigns: [
+      {
+        image: 'assets/panels/stop.png',
+        title: 'STOP',
+        description: 'Arrêt obligatoire à l’intersection.'
+      },
+      {
+        image: 'assets/panels/cedez-passage.png',
+        title: 'Cédez le passage',
+        description: 'Ralentir et céder le passage si nécessaire.'
+      },
+      {
+        image: 'assets/panels/sens-interdit.png',
+        title: 'Sens interdit',
+        description: 'Interdiction de circuler dans ce sens.'
+      }
+    ],
+
+
     qcm: [
       { question: 'Que signifie une ligne continue au sol ?', options: ['Dépassement autorisé', 'Dépassement interdit', 'Priorité à gauche'], answer: 1 },
       { question: 'Que devez-vous faire à un stop ?', options: ['Ralentir', 'S’arrêter totalement', 'Klaxonner et passer'], answer: 1 },

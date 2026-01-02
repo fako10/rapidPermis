@@ -1,5 +1,5 @@
 import {Component, OnInit, signal} from '@angular/core';
-import {Router, RouterModule, RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterModule, RouterOutlet} from '@angular/router';
 import {Utilisateur} from './_models/utilisateur.model';
 import {TokenStorageService} from './_services/token.storage.service';
 import {CommonModule} from '@angular/common';
@@ -18,6 +18,8 @@ export class App implements  OnInit{
   isLoggedIn = false;
   username?: string;
   connectedUser!: Utilisateur;
+  showNavbar = true;
+
 
   ngOnInit() {
 
@@ -38,6 +40,21 @@ export class App implements  OnInit{
               private tokenStorageService: TokenStorageService,
               private authService: AuthService
               ) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const hiddenRoutes = [
+          '/examen',
+          '/free-test',
+          '/quiz'
+        ];
+
+        this.showNavbar = !hiddenRoutes.some(route =>
+          event.url.includes(route)
+        );
+      }
+    });
+
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {

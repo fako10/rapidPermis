@@ -51,7 +51,7 @@ export class PreparationTheorie implements OnInit {
 
   ngOnInit(): void {
     this.connectedUser = this.tokenStorage.getUser();
-    this.isEnabled = this.connectedUser.enabled || false;
+    this.isEnabled = this.connectedUser.locked || false;
     this.loadAttempts();
   }
 

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Question} from '../_models/question.model';
 import {QuestionService} from '../_services/question.service';
 import {NgForOf, NgIf} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -34,7 +34,8 @@ export class Quiz implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private questionService: QuestionService) {}
+    private questionService: QuestionService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id')!;
@@ -107,6 +108,10 @@ export class Quiz implements OnInit {
     this.showResult = false;
     this.quizFinished = false;
     this.selectedAnswer = null;
+  }
+
+  goToAccueil(): void {
+    this.router.navigateByUrl('/');
   }
 
 

@@ -6,6 +6,7 @@ export class  Utilisateur {
   password!:                string;
   userRole?:                string;
   enabled?:                 boolean;
+  locked?:                 boolean;
   hasPreparationAccess?:    boolean;
 
 

@@ -1,4 +1,4 @@
-<header class="prepa-header">
+<header class="prepa-header" *ngIf="showNavbar">
 
   <!-- Partie gauche -->
   <a routerLink="/" class="prepa-logo">
@@ -36,7 +36,7 @@
   <router-outlet></router-outlet>
 </main>
 
-<footer class="prepa-footer">
+<footer class="prepa-footer" *ngIf="showNavbar">
   <div class="footer-container">
 
     <div class="footer-section">

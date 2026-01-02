@@ -40,7 +40,7 @@
       <h2 class="prepa-section-title">🧠 Catégories d'entraînement</h2>
 
       <div class="prepa-grid">
-        <div *ngFor="let cat of categories" class="prepa-card"  [ngClass]="{ 'disabled': isEnabled }">
+        <div *ngFor="let cat of categories" class="prepa-card"  [ngClass]="{ 'disabled': !isEnabled }">
 
           <div class="prepa-card-icon">{{ cat.icon }}</div>
           <div class="prepa-card-title">{{ cat.name }}</div>
@@ -80,12 +80,11 @@
       <h2 class="prepa-section-title">🎯 Examens de simulation</h2>
 
 
-
       <div class="prepa-grid">
         <div
           *ngFor="let sim of simulations"
           class="prepa-card"
-          [ngClass]="{ 'disabled': isEnabled }"
+          [ngClass]="{ 'disabled': !isEnabled }"
         >
           <div class="prepa-card-title">{{ sim.title }}</div>
           <div class="prepa-card-info">
@@ -107,7 +106,7 @@
         <div
           *ngFor="let sim of attempts"
           class="prepa-card"
-          [ngClass]="{ 'disabled': isEnabled }"
+          [ngClass]="{ 'disabled': !isEnabled }"
         >
           <div class="prepa-card-title">{{ sim.examenName }}</div>
           <div class="prepa-card-info">

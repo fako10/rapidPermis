@@ -1,152 +1,48 @@
 <section>
-<div class="block">
+  <div class="block">
 
-  <!-- Title -->
-  <div class="text-center mb-5">
-    <h1 class="fw-bold">Cours du Code de la Route</h1>
-    <p class="text-muted">Choisissez un thème pour accéder au contenu détaillé</p>
+    <!-- Title -->
+    <div class="text-center mb-5">
+      <h1 class="fw-bold">Cours du Code de la Route</h1>
+      <p class="text-muted">
+        Choisissez un thème pour accéder au contenu détaillé
+      </p>
+    </div>
+
+    <!-- Themes Grid -->
+    <div class="row g-4">
+
+      <div
+        class="col-md-6 col-lg-4"
+        *ngFor="let theme of themes"
+      >
+        <div class="card shadow-sm h-100">
+           <span
+             *ngIf="!isEnabled"
+             class="badge bg-danger position-absolute top-0 end-0 m-3"
+           >
+            🔒 Verrouillé
+          </span>
+          <div class="card-body text-center">
+            <h4 class="fw-bold">{{ theme.title }}</h4>
+            <p class="text-muted">{{ theme.description }}</p>
+
+            <a
+              routerLink="/cours/theme/4"
+              class="btn w-100 mt-3"
+              [class.btn-primary]="isEnabled"
+              [class.btn-secondary]="!isEnabled"
+              [class.disabled]="!isEnabled"
+              [attr.aria-disabled]="!isEnabled"
+              (click)="!isEnabled && $event.preventDefault()"
+            >
+              Voir le cours
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <!-- Themes Grid -->
-  <div class="row g-4">
-
-    <!-- THEME 1 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 1</h4>
-          <p class="text-muted">La circulation routière</p>
-          <a routerLink="/cours/theme/1" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 2 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 2</h4>
-          <p class="text-muted">Le conducteur</p>
-          <a routerLink="/cours/theme/1" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 3 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 3</h4>
-          <p class="text-muted">La route</p>
-          <a routerLink="/cours/theme/3" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 4 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 4</h4>
-          <p class="text-muted">Les autres usagers</p>
-          <a routerLink="/cours/theme/4" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 5 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 5</h4>
-          <p class="text-muted">Réglementation générale</p>
-          <a routerLink="/cours/theme/5" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 6 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 6</h4>
-          <p class="text-muted">Les premiers secours</p>
-          <a routerLink="/cours/theme/6" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 7 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 7</h4>
-          <p class="text-muted">Prendre et quitter son véhicule</p>
-          <a routerLink="/cours/theme/7" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 8 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 8</h4>
-          <p class="text-muted">La mécanique et l’entretien</p>
-          <a routerLink="/cours/theme/8" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 9 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 9</h4>
-          <p class="text-muted">Sécurité conducteur & routière</p>
-          <a routerLink="/cours/theme/9" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- THEME 10 -->
-    <div class="col-md-6 col-lg-4 mx-auto">
-      <div class="card shadow-sm h-100">
-        <div class="card-body text-center">
-          <h4 class="fw-bold">Thème 10</h4>
-          <p class="text-muted">Environnement</p>
-          <a routerLink="/cours/theme/10" class="btn btn-primary w-100 mt-3">
-            Voir le cours
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-
 </section>
-
-
-
-
